@@ -1,0 +1,17 @@
+Package: LocalVariableImportanceViaOscillations
+Title: Local variable importance via oscillations of Ceteris Paribus profiles
+Version: 0.0.0.9000
+Authors@R: person("Anna", "Kozak", email = "anna1993kozak@gmail.com", role = c("aut", "cre"))
+Description: Calculates a local variable importance via oscillations of Ceteris Paribus profiles.
+Depends: R (>= 3.4.2)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Suggests: knitr,
+    rmarkdown,
+    DALEX,
+    ceterisParibus,
+    mlbench,
+    randomForest
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1
