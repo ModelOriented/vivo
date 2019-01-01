@@ -3,6 +3,7 @@
 #' This function calculate local importance measure in eight variants.
 #'
 #' @param cp data.frame generate by ceterisParibus::ceteris_paribus()
+#' @param df data.frame with raw data to model
 #' @param absolute_deviation logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares
 #' @param point logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average CP
 #' @param density logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted
@@ -19,7 +20,7 @@
 #'
 
 
-LocalVariableImportanceViaOscillations <- function(cp, absolute_deviation = TRUE, point = TRUE, density = FALSE){
+LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE){
   avg_yhat <- lapply(unique(cp$`_vname_`), function(x){
     mean(cp$`_yhat_`[cp$`_vname_` == x])
   })

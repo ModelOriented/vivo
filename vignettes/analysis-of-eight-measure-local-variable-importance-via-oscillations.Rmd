@@ -1,0 +1,22 @@
+---
+title: "Analysis of eight measure local variable importance via oscillations"
+author: "Anna Kozak"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Example for function $f(\textbf{x})=x_1 \cdot x_2$ where $X_1, X_2 \sim U[0,1]$
+
+```{r, message=FALSE, error=FALSE, warning=FALSE}
+
+```

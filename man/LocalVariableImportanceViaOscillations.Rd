@@ -4,11 +4,13 @@
 \alias{LocalVariableImportanceViaOscillations}
 \title{Local Variable Importance measure based on Ceteris Paribus profiles.}
 \usage{
-LocalVariableImportanceViaOscillations(cp, absolute_deviation = TRUE,
+LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE,
   point = TRUE, density = FALSE)
 }
 \arguments{
 \item{cp}{data.frame generate by ceterisParibus::ceteris_paribus()}
+
+\item{df}{data.frame with raw data to model}
 
 \item{absolute_deviation}{logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares}
 
