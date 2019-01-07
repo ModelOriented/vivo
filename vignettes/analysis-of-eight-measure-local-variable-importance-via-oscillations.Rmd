@@ -17,6 +17,135 @@ knitr::opts_chunk$set(
 
 ## Example for function $f(\textbf{x})=x_1 \cdot x_2$ where $X_1, X_2 \sim U[0,1]$
 
-```{r, message=FALSE, error=FALSE, warning=FALSE}
+```{r, include=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE){
+  avg_yhat <- lapply(unique(cp$`_vname_`), function(x){
+    mean(cp$`_yhat_`[cp$`_vname_` == x])
+  })
+  names(avg_yhat) <- unique(cp$`_vname_`)
+  variableDensity <- apply(df[, unique(cp$`_vname_`)], 2, function(x){
+    dx <- density(x)
+  })
+  weight <- lapply(unique(cp$`_vname_`), function(x) {approx(variableDensity[[as.character(x)]][["x"]],
+                                                             variableDensity[[as.character(x)]][["y"]],
+                                                             xout = cp[cp$`_vname_` == x, as.character(x)])})
+  names(weight) <- unique(cp$`_vname_`)
+  obs <- attr(cp, "observations")
 
+  if(absolute_deviation == TRUE){
+    if(point == TRUE){
+      if(density == TRUE){
+        ## a=T, p=T, d=T
+        return(unlist(lapply(unique(cp$`_vname_`), function(m){
+          sum(abs(weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"]))))
+        })))
+      }else{
+        ## a=T, p=T, d=F
+        return(unlist(lapply(unique(cp$`_vname_`), function(w){
+          sum(abs((cp[cp$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
+        })))
+      }
+    }else{
+      if(density == TRUE){
+        ## a=T, p=F, d=T
+        return(unlist(lapply(unique(cp$`_vname_`), function(m){
+          sum(abs(weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]]))
+        })))
+      }else{
+        ## a=T, p=F, d=F
+        return(unlist(lapply(unique(cp$`_vname_`), function(w){
+          sum(abs((cp[cp$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])))
+        })))
+      }
+    }
+  }else{
+    if(point == TRUE){
+      if(density == TRUE){
+        ## a=F, p=T, d=T
+        return(unlist(lapply(unique(cp$`_vname_`), function(m){
+          sqrt(sum((weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
+        })))
+      }else{
+        ## a=F, p=T, d=F
+        return( unlist(lapply(unique(cp$`_vname_`), function(w){
+          sqrt(sum((cp[cp$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2)/length(cp[cp$`_vname_` == w, "_yhat_"]))
+        })))
+      }
+    }else{
+      if(density == TRUE){
+        ## a=F, p=F, d=T
+        return( unlist(lapply(unique(cp$`_vname_`), function(m){
+          sqrt(sum((weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
+        })))
+      }else{
+        ## a=F, p=F, d=F
+        return( unlist(lapply(unique(cp$`_vname_`), function(w){
+          sqrt(sum((cp[cp$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])^2)/(length(cp[cp$`_vname_` == w, "_yhat_"])))
+        })))
+      }
+    }
+  }
+
+}
+
+
+
+plot <- function(cp, df){
+  lvivo <- list()
+  p <- 1
+  for(i in c(TRUE, FALSE)){
+    for(j in c(TRUE, FALSE)){
+      for(k in c(TRUE, FALSE)){
+        lvivo[[p]] <- list(LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = i, point = j, density = k))
+        lvivo[[p]][[1]][length(lvivo[[p]][[1]])+1] <- paste0("abs_dev=", i, "point=", j, "density=", k)
+        p <- p + 1
+      }
+    }
+  }
+  t <- data.frame(1,1,1)
+  names(t) <- c("y", "x", "text")
+  for(i in 1:length(lvivo)){
+    for(j in 1:length(unique(cp$`_vname_`))){
+      wiersz <- c(lvivo[[i]][[1]][j], as.character(unique(cp$`_vname_`)[j]), lvivo[[i]][[1]][length(lvivo[[1]][[1]])])
+      t <- rbind(t, wiersz)
+    }
+  }
+  t <- t[-1, ]
+  t$y <- as.numeric(as.character(t$y))
+  p1 <- ggplot(t[1:(4*length(unique(cp$`_vname_`))), ], aes(x = x, y = y)) + geom_bar(stat = "identity") + facet_wrap(~text)
+  p2 <- ggplot(t[-c(1:(4*length(unique(cp$`_vname_`)))),], aes(x = x, y = y)) + geom_bar(stat = "identity") + facet_wrap(~text)
+  grid.arrange(p1, p2)
+}
+
+```
+
+```{r,include=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+library(gridExtra)
+library(grid)
+library(ggplot2)
+library(lattice)
+library(randomForest)
+library(DALEX)
+library(ceterisParibus)
+
+n <- 10000
+x1 <- runif(n, 0, 1)
+x2 <- runif(n, 0, 1)
+df <- data.frame(x1, x2)
+df$y <- df$x1*df$x2
+
+
+```
+
+```{r}
+knitr::kable(head(df))
+#randomForest model
+rf <- randomForest(y~ x1*x2, data=df)
+#DALEX::explain
+explain_rf <- explain(rf, df[,1:2], y=df$y)
+#add new observation
+new_obs <- data.frame(x1=0, x2=0)
+#make a ceterisparibus plot
+cp_rf <- ceteris_paribus(explain_rf, observation = new_obs)
+plot(cp_rf, df)
 ```
