@@ -17,6 +17,10 @@ LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE,
 \item{point}{logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average CP}
 
 \item{density}{logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted}
+
+\item{kernel_density}{a character string giving the smoothing kernel to be used. This must partially match one of "gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine" or "optcosine", with default "gaussian", and may be abbreviated to a unique prefix (single letter).}
+
+\item{bw_density}{the smoothing bandwidth to be used. The default is "nrd0".}
 }
 \description{
 This function calculate local importance measure in eight variants.

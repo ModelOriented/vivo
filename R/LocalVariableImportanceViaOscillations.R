@@ -7,6 +7,8 @@
 #' @param absolute_deviation logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares
 #' @param point logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average CP
 #' @param density logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted
+#' @param kernel_density a character string giving the smoothing kernel to be used. This must partially match one of "gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine" or "optcosine", with default "gaussian", and may be abbreviated to a unique prefix (single letter).
+#' @param bw_density the smoothing bandwidth to be used. The default is "nrd0".
 #'
 #' @examples
 #' \dontrun{
@@ -26,7 +28,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
   })
   names(avg_yhat) <- unique(cp$`_vname_`)
   variableDensity <- apply(df[, unique(cp$`_vname_`)], 2, function(x){
-    dx <- density(x)
+    dx <- density(x, kernel = kernel_density, bw = bw_density)
   })
   weight <- lapply(unique(cp$`_vname_`), function(x) {approx(variableDensity[[as.character(x)]][["x"]],
                                                              variableDensity[[as.character(x)]][["y"]],
@@ -87,6 +89,27 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
       }
     }
   }
+
+  cat("Local Variable Importance Via Oscillations with parameters: \n")
+  cat("absolute_deviation = ", absolute_deviation)
+  cat("point = ", point)
+  cat("density = ", density)
+  cat("kernel_density = ", kernel_density)
+  cat("bw_density = ", bw_density)
+  cat("\n")
+  cat("Results: \n")
+  cat(paste0(unique(cp$`_vname_`), ": ", result, "\n"))
+  lvivo <- list(absolute_deviation = absolute_deviation,
+                point = point,
+                density = density,
+                kernel_density = kernel_density,
+                bw_density = bw_density,
+                variable_name = unique(cp$`_vname_`),
+                result = data.frame(variable_name = unique(cp$`_vname_`), measure = result))
+  lvivo
+
+
+
 
 }
 

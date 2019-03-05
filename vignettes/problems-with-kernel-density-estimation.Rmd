@@ -1,0 +1,160 @@
+---
+title: "Problems with kernel density estimation"
+author: "Anna Kozak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+## Friedmann regression problem
+
+```{r, message=FALSE, error=FALSE, warning=FALSE}
+library(mlbench)
+library(plyr)
+library(ggplot2)
+
+data <- mlbench.friedman1(10000)
+y <- data$y
+x <- data$x
+df <- data.frame(y = y , x)
+names(df) <- tolower(names(df))
+```
+
+#### Gaussian Kernel
+```{r,  message=FALSE, error=FALSE, warning=FALSE}
+variableDensity <- apply(df, 2, function(x){
+  dx <- density(x)
+})
+
+## for variable x1,...,x10
+gestosc <- list()
+j <- 1
+for(i in c(names(df)[2:11])){
+  gestosc[[j]] <- data.frame(cbind(variableDensity[[i]][["x"]], variableDensity[[i]][["y"]], rep(i, length(variableDensity[[i]][["x"]]))))
+  j <- j + 1
+}
+
+g <- ldply(gestosc, data.frame)
+g$X1 <- as.numeric(as.character(g$X1))
+g$X2 <- as.numeric(as.character(g$X2))
+
+ggplot(g, aes(x = X1, y = X2)) + geom_line() + facet_wrap(~X3) + labs(x = "value", y = "density")
+
+```
+
+#### Uniform Kernel
+```{r,  message=FALSE, error=FALSE, warning=FALSE}
+variableDensity <- apply(df, 2, function(x){
+  dx <- density(x, kernel = "rectangular")
+})
+
+##for variable x1,...,x10
+gestosc1 <- list()
+j1 <- 1
+for(i1 in c(names(df)[2:11])){
+  gestosc1[[j1]] <- data.frame(cbind(variableDensity[[i1]][["x"]], variableDensity[[i1]][["y"]], rep(i1, length(variableDensity[[i1]][["x"]]))))
+  j1 <- j1 + 1
+}
+
+g1 <- ldply(gestosc1, data.frame)
+g1$X1 <- as.numeric(as.character(g1$X1))
+g1$X2 <- as.numeric(as.character(g1$X2))
+
+
+ggplot(g1, aes(x = X1, y = X2)) + geom_line() + facet_wrap(~X3)
+
+```
+
+
+```{r}
+# library("DALEX")
+# library("randomForest")
+# library("ceterisParibus")
+# library(gridExtra)
+# library(grid)
+# set.seed(59)
+# 
+# ##############################################
+# ##############################################3
+# ########################################3
+# apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+#                                       no.rooms, data = apartments)
+# 
+# explainer_rf <- explain(apartments_rf_model,
+#                         data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+# new_apartment <- apartmentsTest[1, ]
+# new_apartment
+# cp_rf <- ceteris_paribus(explainer_rf, observation = new_apartment[,2:5])
+# cp_rf
+# plot(cp_rf)
+# 
+# 
+# #####  test cp plot #####################3
+# cp_rf[which(cp_rf$`_vname_` == "no.rooms"), ] -> j
+# ggplot(j, aes(x = no.rooms, y = `_yhat_`)) + geom_line()
+# ##############################
+# jj <- j[,c("no.rooms", '_yhat_')]
+# jj_unique <- unique(jj)
+# ggplot(jj_unique, aes(x = no.rooms, y = `_yhat_`)) + geom_line()
+# 
+# 
+# wyn2 <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5])
+# wyn3 <- LocalVariableImportanceViaOscillations(cp_rf,absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5], bw_density = "SJ")
+# plot1(cp_rf, apartments[,2:5])
+# plot2(cp_rf, apartments[,2:5])
+# 
+# hist(apartments$no.rooms, breaks = 100)
+# apar
+# 
+# 
+# ####
+# 
+# library(mlbench)
+# library(plyr)
+# library(ggplot2)
+# 
+# data <- mlbench.friedman1(10000)
+# y <- data$y
+# x <- data$x
+# df <- data.frame(y = y , x)
+# names(df) <- tolower(names(df))
+# 
+# friedman_rf_model <- randomForest(y ~., data = df)
+# explainer_rf <- explain(friedman_rf_model, data = df[,2:11], y =df$y)
+# #mlbench.friedman1(1)
+# new_friedmann <- data.frame("y" = 8.924793, "x1" = 0.9002915, "x2" = 0.07000687, "x3" = 0.2255303,
+#                             "x4" = 0.3825585, "x5" = 0.2023882, "x6" = 0.389687, "x7" = 0.04077074,
+#                             "x8" = 0.2666487, "x9" = 0.144826, "x10" = 0.4970784)
+# 
+# cp_rf <- ceteris_paribus(explainer_rf, observations = new_friedmann[,2:11])
+# 
+# cp_rf
+# plot(cp_rf)
+# 
+# wyn <- LocalVariableImportanceViaOscillations(cp = cp_rf, df = df[2:11], absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "nrd0")
+# wyn1 <- LocalVariableImportanceViaOscillations(cp = cp_rf, df = df[2:11], absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "SJ")
+# 
+# 
+# 
+# a <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11])
+# b <- LocalVariableImportanceViaOscillations1(cp_rf,absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11])
+# plot(a, type="l")
+# lines(b, col="red")
+# plot1(cp_rf, df[,2:11])
+# plot2(cp_rf, df[,2:11])
+# 
+# 
+# p1 <- vip(friedman_rf_model, method = "pdp", feature_names = paste0("x", 1:10)) +
+#   labs(x = "", y = "Importance", title = "PDP method") +
+#   theme_light()
+
+```
