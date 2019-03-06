@@ -76,7 +76,7 @@
       <h1>Problems with kernel density estimation</h1>
                         <h4 class="author">Anna Kozak</h4>
             
-            <h4 class="date">2019-03-05</h4>
+            <h4 class="date">2019-03-06</h4>
       
       
       <div class="hidden name"><code>problems-with-kernel-density-estimation.Rmd</code></div>
@@ -116,14 +116,14 @@ g &lt;-<span class="st"> </span><span class="kw">ldply</span>(gestosc, data.fram
 g<span class="op">$</span>X1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X1))
 g<span class="op">$</span>X2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X2))
 
-<span class="kw">ggplot</span>(g, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"value"</span>, <span class="dt">y =</span> <span class="st">"density"</span>)</code></pre></div>
-<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<span class="kw">ggplot</span>(g, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"density"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
-<div id="uniform-kernel" class="section level4">
+<div id="gaussian-kernel-with-bw-sj" class="section level4">
 <h4 class="hasAnchor">
-<a href="#uniform-kernel" class="anchor"></a>Uniform Kernel</h4>
+<a href="#gaussian-kernel-with-bw-sj" class="anchor"></a>Gaussian Kernel with bw = “SJ”</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">variableDensity &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(df, <span class="dv">2</span>, <span class="cf">function</span>(x){
-  dx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(x, <span class="dt">kernel =</span> <span class="st">"rectangular"</span>)
+  dx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(x, <span class="dt">bw =</span> <span class="st">"SJ"</span>)
 })
 
 ##for variable x1,...,x10
@@ -139,88 +139,197 @@ g1<span class="op">$</span>X1 &lt;-<span class="st"> </span><span class="kw"><a 
 g1<span class="op">$</span>X2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g1<span class="op">$</span>X2))
 
 
-<span class="kw">ggplot</span>(g1, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3)</code></pre></div>
-<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library("DALEX")</span>
-<span class="co"># library("randomForest")</span>
-<span class="co"># library("ceterisParibus")</span>
-<span class="co"># library(gridExtra)</span>
-<span class="co"># library(grid)</span>
-<span class="co"># set.seed(59)</span>
-<span class="co"># </span>
-<span class="co"># ##############################################</span>
-<span class="co"># ##############################################3</span>
-<span class="co"># ########################################3</span>
-<span class="co"># apartments_rf_model &lt;- randomForest(m2.price ~ construction.year + surface + floor +</span>
-<span class="co">#                                       no.rooms, data = apartments)</span>
-<span class="co"># </span>
-<span class="co"># explainer_rf &lt;- explain(apartments_rf_model,</span>
-<span class="co">#                         data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)</span>
-<span class="co"># new_apartment &lt;- apartmentsTest[1, ]</span>
-<span class="co"># new_apartment</span>
-<span class="co"># cp_rf &lt;- ceteris_paribus(explainer_rf, observation = new_apartment[,2:5])</span>
-<span class="co"># cp_rf</span>
-<span class="co"># plot(cp_rf)</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># #####  test cp plot #####################3</span>
-<span class="co"># cp_rf[which(cp_rf$`_vname_` == "no.rooms"), ] -&gt; j</span>
-<span class="co"># ggplot(j, aes(x = no.rooms, y = `_yhat_`)) + geom_line()</span>
-<span class="co"># ##############################</span>
-<span class="co"># jj &lt;- j[,c("no.rooms", '_yhat_')]</span>
-<span class="co"># jj_unique &lt;- unique(jj)</span>
-<span class="co"># ggplot(jj_unique, aes(x = no.rooms, y = `_yhat_`)) + geom_line()</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># wyn2 &lt;- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5])</span>
-<span class="co"># wyn3 &lt;- LocalVariableImportanceViaOscillations(cp_rf,absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5], bw_density = "SJ")</span>
-<span class="co"># plot1(cp_rf, apartments[,2:5])</span>
-<span class="co"># plot2(cp_rf, apartments[,2:5])</span>
-<span class="co"># </span>
-<span class="co"># hist(apartments$no.rooms, breaks = 100)</span>
-<span class="co"># apar</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># ####</span>
-<span class="co"># </span>
-<span class="co"># library(mlbench)</span>
-<span class="co"># library(plyr)</span>
-<span class="co"># library(ggplot2)</span>
-<span class="co"># </span>
-<span class="co"># data &lt;- mlbench.friedman1(10000)</span>
-<span class="co"># y &lt;- data$y</span>
-<span class="co"># x &lt;- data$x</span>
-<span class="co"># df &lt;- data.frame(y = y , x)</span>
-<span class="co"># names(df) &lt;- tolower(names(df))</span>
-<span class="co"># </span>
-<span class="co"># friedman_rf_model &lt;- randomForest(y ~., data = df)</span>
-<span class="co"># explainer_rf &lt;- explain(friedman_rf_model, data = df[,2:11], y =df$y)</span>
-<span class="co"># #mlbench.friedman1(1)</span>
-<span class="co"># new_friedmann &lt;- data.frame("y" = 8.924793, "x1" = 0.9002915, "x2" = 0.07000687, "x3" = 0.2255303,</span>
-<span class="co">#                             "x4" = 0.3825585, "x5" = 0.2023882, "x6" = 0.389687, "x7" = 0.04077074,</span>
-<span class="co">#                             "x8" = 0.2666487, "x9" = 0.144826, "x10" = 0.4970784)</span>
-<span class="co"># </span>
-<span class="co"># cp_rf &lt;- ceteris_paribus(explainer_rf, observations = new_friedmann[,2:11])</span>
-<span class="co"># </span>
-<span class="co"># cp_rf</span>
-<span class="co"># plot(cp_rf)</span>
-<span class="co"># </span>
-<span class="co"># wyn &lt;- LocalVariableImportanceViaOscillations(cp = cp_rf, df = df[2:11], absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "nrd0")</span>
-<span class="co"># wyn1 &lt;- LocalVariableImportanceViaOscillations(cp = cp_rf, df = df[2:11], absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "SJ")</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># a &lt;- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11])</span>
-<span class="co"># b &lt;- LocalVariableImportanceViaOscillations1(cp_rf,absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11])</span>
-<span class="co"># plot(a, type="l")</span>
-<span class="co"># lines(b, col="red")</span>
-<span class="co"># plot1(cp_rf, df[,2:11])</span>
-<span class="co"># plot2(cp_rf, df[,2:11])</span>
-<span class="co"># </span>
-<span class="co"># </span>
-<span class="co"># p1 &lt;- vip(friedman_rf_model, method = "pdp", feature_names = paste0("x", 1:10)) +</span>
-<span class="co">#   labs(x = "", y = "Importance", title = "PDP method") +</span>
-<span class="co">#   theme_light()</span></code></pre></div>
+<span class="kw">ggplot</span>(g1, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"density"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"DALEX"</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"randomForest"</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ceterisParibus"</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gridExtra)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grid)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">59</span>)</code></pre></div>
+<div id="local-variable-importance-via-oscillations-kernel-gaussian-bw-nrd0" class="section level5">
+<h5 class="hasAnchor">
+<a href="#local-variable-importance-via-oscillations-kernel-gaussian-bw-nrd0" class="anchor"></a>Local Variable Importance Via Oscillations, kernel = “gaussian”, bw = “nrd0”</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">friedman_rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(y <span class="op">~</span>., <span class="dt">data =</span> df)
+explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(friedman_rf_model, <span class="dt">data =</span> df[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], <span class="dt">y =</span>df<span class="op">$</span>y)
+new_friedmann &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="st">"y"</span> =<span class="st"> </span><span class="fl">8.924793</span>, <span class="st">"x1"</span> =<span class="st"> </span><span class="fl">0.9002915</span>, <span class="st">"x2"</span> =<span class="st"> </span><span class="fl">0.07000687</span>, <span class="st">"x3"</span> =<span class="st"> </span><span class="fl">0.2255303</span>,
+                            <span class="st">"x4"</span> =<span class="st"> </span><span class="fl">0.3825585</span>, <span class="st">"x5"</span> =<span class="st"> </span><span class="fl">0.2023882</span>, <span class="st">"x6"</span> =<span class="st"> </span><span class="fl">0.389687</span>, <span class="st">"x7"</span> =<span class="st"> </span><span class="fl">0.04077074</span>,
+                            <span class="st">"x8"</span> =<span class="st"> </span><span class="fl">0.2666487</span>, <span class="st">"x9"</span> =<span class="st"> </span><span class="fl">0.144826</span>, <span class="st">"x10"</span> =<span class="st"> </span><span class="fl">0.4970784</span>)
+
+cp_rf &lt;-<span class="st"> </span><span class="kw">ceteris_paribus</span>(explainer_rf, <span class="dt">observations =</span> new_friedmann[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>])
+
+<span class="kw"><a href="../reference/plot.html">plot</a></span>(cp_rf)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LocalVariableImportanceViaOscillations.html">LocalVariableImportanceViaOscillations</a></span>(<span class="dt">cp =</span> cp_rf, <span class="dt">df =</span> df[, <span class="dv">2</span><span class="op">:</span><span class="dv">11</span>])
+<span class="co">#&gt; Local Variable Importance Via Oscillations with parameters: </span>
+<span class="co">#&gt; absolute_deviation =  TRUE </span>
+<span class="co">#&gt; point =  TRUE </span>
+<span class="co">#&gt; density =  FALSE </span>
+<span class="co">#&gt; kernel_density =  gaussian </span>
+<span class="co">#&gt; bw_density =  nrd0 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Results: </span>
+<span class="co">#&gt; x1: 35.0514916972774</span>
+<span class="co">#&gt;  x2: 510.554030709738</span>
+<span class="co">#&gt;  x3: 93.3703495182047</span>
+<span class="co">#&gt;  x4: 254.097614518194</span>
+<span class="co">#&gt;  x5: 182.001680337295</span>
+<span class="co">#&gt;  x6: 3.36191797793769</span>
+<span class="co">#&gt;  x7: 15.5619443925594</span>
+<span class="co">#&gt;  x8: 6.61663628342901</span>
+<span class="co">#&gt;  x9: 9.14760492541785</span>
+<span class="co">#&gt;  x10: 6.34163715274263</span>
+<span class="kw">ggplot</span>(wyn<span class="op">$</span>result, <span class="kw">aes</span>(<span class="dt">x =</span> variable_name, <span class="dt">y =</span> measure)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">"identity"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"measure"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+</div>
+<div id="local-variable-importance-via-oscillations-kernel-gaussian-bw-sj-link" class="section level5">
+<h5 class="hasAnchor">
+<a href="#local-variable-importance-via-oscillations-kernel-gaussian-bw-sj-link" class="anchor"></a>Local Variable Importance Via Oscillations, kernel = “gaussian”, bw = “SJ” <a href="https://www.researchgate.net/publication/224817413_A_Reliable_Data-Based_Bandwidth_Selection_Method_for_Kernel_Density_Estimation">link</a>
+</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyn1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LocalVariableImportanceViaOscillations.html">LocalVariableImportanceViaOscillations</a></span>(<span class="dt">cp =</span> cp_rf, <span class="dt">df =</span> df[,<span class="dv">2</span><span class="op">:</span><span class="dv">11</span>], <span class="dt">kernel =</span> <span class="st">"rectangular"</span>, <span class="dt">bw_density =</span> <span class="st">"SJ"</span>)
+<span class="co">#&gt; Local Variable Importance Via Oscillations with parameters: </span>
+<span class="co">#&gt; absolute_deviation =  TRUE </span>
+<span class="co">#&gt; point =  TRUE </span>
+<span class="co">#&gt; density =  FALSE </span>
+<span class="co">#&gt; kernel_density =  rectangular </span>
+<span class="co">#&gt; bw_density =  SJ </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Results: </span>
+<span class="co">#&gt; x1: 35.0514916972774</span>
+<span class="co">#&gt;  x2: 510.554030709738</span>
+<span class="co">#&gt;  x3: 93.3703495182047</span>
+<span class="co">#&gt;  x4: 254.097614518194</span>
+<span class="co">#&gt;  x5: 182.001680337295</span>
+<span class="co">#&gt;  x6: 3.36191797793769</span>
+<span class="co">#&gt;  x7: 15.5619443925594</span>
+<span class="co">#&gt;  x8: 6.61663628342901</span>
+<span class="co">#&gt;  x9: 9.14760492541785</span>
+<span class="co">#&gt;  x10: 6.34163715274263</span>
+<span class="kw">ggplot</span>(wyn1<span class="op">$</span>result, <span class="kw">aes</span>(<span class="dt">x =</span> variable_name, <span class="dt">y =</span> measure)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">"identity"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"measure"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+</div>
+</div>
+</div>
+<div id="apartments-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#apartments-data" class="anchor"></a>Apartments data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(apartments)
+apartments_rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span>
+<span class="st">                                       </span>no.rooms, <span class="dt">data =</span> apartments)
+
+explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apartments_rf_model,
+                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)
+new_apartment &lt;-<span class="st"> </span>apartmentsTest[<span class="dv">1</span>, ]
+new_apartment
+<span class="co">#&gt;      m2.price construction.year surface floor no.rooms    district</span>
+<span class="co">#&gt; 1001     4644              1976     131     3        5 Srodmiescie</span>
+cp_rf &lt;-<span class="st"> </span><span class="kw">ceteris_paribus</span>(explainer_rf, <span class="dt">observation =</span> new_apartment[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>])
+<span class="kw"><a href="../reference/plot.html">plot</a></span>(cp_rf)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+<div id="density-of-variable" class="section level3">
+<h3 class="hasAnchor">
+<a href="#density-of-variable" class="anchor"></a>Density of variable</h3>
+<div id="histogram" class="section level4">
+<h4 class="hasAnchor">
+<a href="#histogram" class="anchor"></a>Histogram</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dane_ &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()
+j &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(apartments)){
+  dane_[[j]] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind</a></span>(apartments[,i], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(i, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(apartments))))
+  j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="dv">1</span>
+}
+
+dane_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">ldply</span>(dane_, data.frame)
+dane_<span class="dv">1</span><span class="op">$</span>X1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(dane_<span class="dv">1</span><span class="op">$</span>X1))
+
+<span class="kw">ggplot</span>(dane_<span class="dv">1</span>, <span class="kw">aes</span>(<span class="dt">x=</span>X1)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">bins=</span><span class="dv">100</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>X2, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"count"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+</div>
+<div id="density-with-gaussian-kernel" class="section level4">
+<h4 class="hasAnchor">
+<a href="#density-with-gaussian-kernel" class="anchor"></a>Density with gaussian kernel</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"apartments"</span>)
+
+variableDensity &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(apartments[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dv">2</span>, <span class="cf">function</span>(x){
+  dx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(x, <span class="dt">kernel =</span> <span class="st">"gaussian"</span>)
+})
+
+gestosc &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()
+j &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(apartments)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])){
+  gestosc[[j]] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind</a></span>(variableDensity[[i]][[<span class="st">"x"</span>]], variableDensity[[i]][[<span class="st">"y"</span>]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(i, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(variableDensity[[i]][[<span class="st">"x"</span>]]))))
+  j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}
+
+g &lt;-<span class="st"> </span><span class="kw">ldply</span>(gestosc, data.frame)
+g<span class="op">$</span>X1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X1))
+g<span class="op">$</span>X2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X2))
+
+<span class="kw">ggplot</span>(g, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3, <span class="dt">scales=</span><span class="st">'free'</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+</div>
+<div id="density-with-gaussian-kernel-and-bw-sj" class="section level4">
+<h4 class="hasAnchor">
+<a href="#density-with-gaussian-kernel-and-bw-sj" class="anchor"></a>Density with gaussian kernel and bw = SJ</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"apartments"</span>)
+
+variableDensity &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(apartments[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="dv">2</span>, <span class="cf">function</span>(x){
+  dx &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(x, <span class="dt">kernel =</span> <span class="st">"gaussian"</span>, <span class="dt">bw =</span> <span class="st">"SJ"</span>)
+})
+
+gestosc &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>()
+j &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(apartments)[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])){
+  gestosc[[j]] &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind</a></span>(variableDensity[[i]][[<span class="st">"x"</span>]], variableDensity[[i]][[<span class="st">"y"</span>]], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(i, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(variableDensity[[i]][[<span class="st">"x"</span>]]))))
+  j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+}
+
+g &lt;-<span class="st"> </span><span class="kw">ldply</span>(gestosc, data.frame)
+g<span class="op">$</span>X1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X1))
+g<span class="op">$</span>X2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(g<span class="op">$</span>X2))
+
+<span class="kw">ggplot</span>(g, <span class="kw">aes</span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="kw">facet_wrap</span>(<span class="op">~</span>X3, <span class="dt">scales=</span><span class="st">'free'</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<div id="local-variable-importance-via-oscillations-kernel-gaussian-bw-nrd0-1" class="section level5">
+<h5 class="hasAnchor">
+<a href="#local-variable-importance-via-oscillations-kernel-gaussian-bw-nrd0-1" class="anchor"></a>Local Variable Importance Via Oscillations, kernel = “gaussian”, bw = “nrd0”</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyn &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LocalVariableImportanceViaOscillations.html">LocalVariableImportanceViaOscillations</a></span>(cp_rf, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>])
+<span class="co">#&gt; Local Variable Importance Via Oscillations with parameters: </span>
+<span class="co">#&gt; absolute_deviation =  TRUE </span>
+<span class="co">#&gt; point =  TRUE </span>
+<span class="co">#&gt; density =  FALSE </span>
+<span class="co">#&gt; kernel_density =  gaussian </span>
+<span class="co">#&gt; bw_density =  nrd0 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Results: </span>
+<span class="co">#&gt; construction.year: 12844.6829651284</span>
+<span class="co">#&gt;  surface: 28744.5326030378</span>
+<span class="co">#&gt;  floor: 32358.2072364485</span>
+<span class="co">#&gt;  no.rooms: 16032.7492764119</span>
+<span class="kw">ggplot</span>(wyn<span class="op">$</span>result, <span class="kw">aes</span>(<span class="dt">x =</span> variable_name, <span class="dt">y =</span> measure)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">"identity"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"measure"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+</div>
+<div id="local-variable-importance-via-oscillations-kernel-gaussian-bw-sj-link-1" class="section level5">
+<h5 class="hasAnchor">
+<a href="#local-variable-importance-via-oscillations-kernel-gaussian-bw-sj-link-1" class="anchor"></a>Local Variable Importance Via Oscillations, kernel = “gaussian”, bw = “SJ” <a href="https://www.researchgate.net/publication/224817413_A_Reliable_Data-Based_Bandwidth_Selection_Method_for_Kernel_Density_Estimation">link</a>
+</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wyn1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LocalVariableImportanceViaOscillations.html">LocalVariableImportanceViaOscillations</a></span>(cp_rf, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">kernel =</span> <span class="st">"rectangular"</span>, <span class="dt">bw_density =</span> <span class="st">"SJ"</span>)
+<span class="co">#&gt; Local Variable Importance Via Oscillations with parameters: </span>
+<span class="co">#&gt; absolute_deviation =  TRUE </span>
+<span class="co">#&gt; point =  TRUE </span>
+<span class="co">#&gt; density =  FALSE </span>
+<span class="co">#&gt; kernel_density =  rectangular </span>
+<span class="co">#&gt; bw_density =  SJ </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Results: </span>
+<span class="co">#&gt; construction.year: 12844.6829651284</span>
+<span class="co">#&gt;  surface: 28744.5326030378</span>
+<span class="co">#&gt;  floor: 32358.2072364485</span>
+<span class="co">#&gt;  no.rooms: 16032.7492764119</span>
+<span class="kw">ggplot</span>(wyn1<span class="op">$</span>result, <span class="kw">aes</span>(<span class="dt">x =</span> variable_name, <span class="dt">y =</span> measure)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">"identity"</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">"`_x_`"</span>, <span class="dt">y =</span> <span class="st">"measure"</span>)</code></pre></div>
+<p><img src="problems-with-kernel-density-estimation_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+</div>
+</div>
 </div>
 </div>
   </div>
@@ -231,6 +340,7 @@ g1<span class="op">$</span>X2 &lt;-<span class="st"> </span><span class="kw"><a 
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#friedmann-regression-problem">Friedmann regression problem</a></li>
+      <li><a href="#apartments-data">Apartments data</a></li>
       </ul>
 </div>
       </div>
