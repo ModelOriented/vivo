@@ -1,41 +1,20 @@
-#' Local Variable Importance measure based on Ceteris Paribus profiles.
+#' Plots Local Variable Importance measure
 #'
-#' This function plot local importance measure in eight variants.
+#' Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 #'
-#' @param cp data.frame generate by ceterisParibus::ceteris_paribus()
-#' @param df data.frame with raw data to model
+#' @param measure object returned from LocalVariableImportanceViaOscillations
 #'
 #' @examples
 #' \dontrun{
-#' plot(cp, df)
+#' measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
+#' plot(measure)
 #' }
 #'
 #' @export
 #'
 
-plot <- function(cp, df){
-  lvivo <- list()
-  p <- 1
-  for(i in c(TRUE, FALSE)){
-    for(j in c(TRUE, FALSE)){
-      for(k in c(TRUE, FALSE)){
-        lvivo[[p]] <- list(LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = i, point = j, density = k))
-        lvivo[[p]][[1]][length(lvivo[[p]][[1]])+1] <- paste0("abs_dev=", i, "point=", j, "density=", k)
-        p <- p + 1
-      }
-    }
-  }
-  t <- data.frame(1,1,1)
-  names(t) <- c("y", "x", "text")
-  for(i in 1:length(lvivo)){
-    for(j in 1:length(unique(cp$`_vname_`))){
-      wiersz <- c(lvivo[[i]][[1]][j], as.character(unique(cp$`_vname_`)[j]), lvivo[[i]][[1]][length(lvivo[[1]][[1]])])
-      t <- rbind(t, wiersz)
-    }
-  }
-  t <- t[-1, ]
-  t$y <- as.numeric(as.character(t$y))
-  p1 <- ggplot(t[1:(4*length(unique(cp$`_vname_`))), ], aes(x = x, y = y)) + geom_bar(stat = "identity") + facet_wrap(~text)
-  p2 <- ggplot(t[-c(1:(4*length(unique(cp$`_vname_`)))),], aes(x = x, y = y)) + geom_bar(stat = "identity") + facet_wrap(~text)
-  grid.arrange(p1, p2)
+plot.local_importance <- function(measure){
+  df <- measure$result
+  ggplot2::ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(-df$measure)]), y = df$measure)) + geom_bar(stat = "identity") +
+    xlab("_x_") + ylab("measure") + ggtitle("")
 }

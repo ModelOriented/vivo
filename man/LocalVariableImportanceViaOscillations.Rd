@@ -5,7 +5,8 @@
 \title{Local Variable Importance measure based on Ceteris Paribus profiles.}
 \usage{
 LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE,
-  point = TRUE, density = FALSE)
+  point = TRUE, density = FALSE, kernel_density = "gaussian",
+  bw_density = "nrd0")
 }
 \arguments{
 \item{cp}{data.frame generate by ceterisParibus::ceteris_paribus()}
@@ -28,9 +29,9 @@ This function calculate local importance measure in eight variants.
 \examples{
 \dontrun{
 
-LocalVariableImportanceViaOscillations(cp, absolute_deviation = TRUE, point = TRUE, density = FALSE)
+LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
 
-LocalVariableImportanceViaOscillations(cp, absolute_deviation = TRUE, point = FALSE, density = FALSE)
+LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "SJ")
 }
 
 }

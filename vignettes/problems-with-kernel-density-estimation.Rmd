@@ -105,6 +105,14 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
 
 
 }
+
+
+plot.local_importance <- function(measure){
+  df <- measure$result
+  ggplot2::ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(-df$measure)]), y = df$measure)) + geom_bar(stat = "identity") +
+    xlab("_x_") + ylab("measure") + ggtitle("")
+}
+
 ```
 
 
@@ -195,7 +203,8 @@ plot(cp_rf)
 
 ```{r}
 wyn <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11])
-ggplot(wyn$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+
+plot.local_importance(wyn)
 ```
 
 
@@ -203,7 +212,7 @@ ggplot(wyn$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identit
 
 ```{r}
 wyn1 <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, df[,2:11], bw_density = "SJ")
-ggplot(wyn1$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+plot.local_importance(wyn1)
 ```
 
 
@@ -294,7 +303,7 @@ ggplot(g, aes(x = X1, y = X2)) + geom_line() +facet_wrap(~X3, scales='free')
 
 ```{r}
 wyn <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5])
-ggplot(wyn$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+plot.local_importance(wyn)
 ```
 
 
@@ -302,7 +311,7 @@ ggplot(wyn$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identit
 
 ```{r}
 wyn1 <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, apartments[,2:5], bw_density = "SJ")
-ggplot(wyn1$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+plot.local_importance(wyn1)
 ```
 
 
@@ -329,13 +338,13 @@ plot(cp_rf)
 
 ```{r}
 wyn <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, data[,2:5])
-ggplot(wyn$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+plot.local_importance(wyn)
 ```
 
 
 ```{r}
 wyn1 <- LocalVariableImportanceViaOscillations(cp_rf, absolute_deviation = TRUE, point = TRUE, density = TRUE, data[,2:5], bw_density = "SJ")
-ggplot(wyn1$result, aes(x = variable_name, y = measure)) + geom_bar(stat="identity") + labs(x = "`_x_`", y = "measure")
+plot.local_importance(wyn1)
 ```
 
 ```{r}
