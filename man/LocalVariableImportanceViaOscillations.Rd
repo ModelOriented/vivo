@@ -23,6 +23,10 @@ LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE,
 
 \item{bw_density}{the smoothing bandwidth to be used. The default is "nrd0".}
 }
+\value{
+A list of the class 'local_variable_importance'.
+It's a list with calculated local variable importance measure.
+}
 \description{
 This function calculate local importance measure in eight variants.
 }

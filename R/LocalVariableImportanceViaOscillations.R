@@ -10,6 +10,8 @@
 #' @param kernel_density a character string giving the smoothing kernel to be used. This must partially match one of "gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine" or "optcosine", with default "gaussian", and may be abbreviated to a unique prefix (single letter).
 #' @param bw_density the smoothing bandwidth to be used. The default is "nrd0".
 #'
+#' @return A list of the class 'local_variable_importance'.
+#' It's a list with calculated local variable importance measure.
 #' @examples
 #' \dontrun{
 #'
@@ -23,6 +25,11 @@
 
 
 LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0"){
+  if (!(c("ceteris_paribus_explainer", "data.frame") %in% class(cp)))
+    stop("The LocalVariableImportanceViaOscillations() function requires an object created with ceteris_paribus() function.")
+  if (!c("data.frame") %in% class(df))
+    stop("The LocalVariableImportanceViaOscillations() function requires a data.frame.")
+
   avg_yhat <- lapply(unique(cp$`_vname_`), function(x){
     mean(cp$`_yhat_`[cp$`_vname_` == x])
   })
@@ -99,13 +106,15 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
   cat("\n")
   cat("Results: \n")
   cat(paste0(unique(cp$`_vname_`), ": ", result, "\n"))
-  lvivo <- list(absolute_deviation = absolute_deviation,
-                point = point,
-                density = density,
-                kernel_density = kernel_density,
-                bw_density = bw_density,
-                variable_name = unique(cp$`_vname_`),
-                result = data.frame(variable_name = unique(cp$`_vname_`), measure = result))
+  # lvivo <- list(absolute_deviation = absolute_deviation,
+  #               point = point,
+  #               density = density,
+  #               kernel_density = kernel_density,
+  #               bw_density = bw_density,
+  #               variable_name = unique(cp$`_vname_`),
+  #               result = data.frame(variable_name = unique(cp$`_vname_`), measure = result))
+  lvivo = data.frame(variable_name = unique(cp$`_vname_`), measure = result)
+  class(lvivo) = c("local_variable_importance")
   lvivo
 
 
