@@ -25,7 +25,7 @@
 
 
 LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0"){
-  if (!(c("ceteris_paribus_explainer", "data.frame") %in% class(cp)))
+  if (!(c("ceteris_paribus_explainer") %in% class(cp)))
     stop("The LocalVariableImportanceViaOscillations() function requires an object created with ceteris_paribus() function.")
   if (!c("data.frame") %in% class(df))
     stop("The LocalVariableImportanceViaOscillations() function requires a data.frame.")

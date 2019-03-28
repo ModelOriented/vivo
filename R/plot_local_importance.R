@@ -14,7 +14,7 @@
 #'
 
 plot.local_importance <- function(measure){
-  df <- as.data.frame(measure)
+  df <- data.frame("variable_name" = measure$variable_name, "measure" = measure$measure)
   ggplot2::ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(-df$measure)]), y = df$measure)) + geom_bar(stat = "identity") +
     xlab("_x_") + ylab("measure") + ggtitle("")
 }
