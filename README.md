@@ -2,8 +2,7 @@
 Local variable importance via oscillations of Ceteris Paribus profiles
 
 
-## Install from GitHub
-
+## Install 
 ```{r}
 install.packages("devtools")
 library(devtools)
