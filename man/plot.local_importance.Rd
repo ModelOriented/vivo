@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_local_importance.R
 \name{plot.local_importance}
 \alias{plot.local_importance}
-\title{Plots Local Variable Importance measure}
+\title{Plot Local Variable Importance measure}
 \usage{
 \method{plot}{local_importance}(measure)
 }
@@ -20,5 +20,7 @@ Function plot.local_importance plots local importance measure based on Ceteris P
 measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
 plot(measure)
 }
+
+
 
 }
