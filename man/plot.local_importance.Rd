@@ -9,6 +9,9 @@
 \arguments{
 \item{measure}{object returned from LocalVariableImportanceViaOscillations}
 }
+\value{
+a ggplot2 object
+}
 \description{
 Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 }
