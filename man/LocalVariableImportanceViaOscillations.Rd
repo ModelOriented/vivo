@@ -5,7 +5,7 @@
 \title{Local Variable Importance measure based on Ceteris Paribus profiles.}
 \usage{
 LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE,
-  point = TRUE, density = FALSE, kernel_density = "gaussian",
+  point = TRUE, density = TRUE, kernel_density = "gaussian",
   bw_density = "nrd0")
 }
 \arguments{

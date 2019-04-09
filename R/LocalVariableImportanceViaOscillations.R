@@ -24,7 +24,7 @@
 #'
 
 
-LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0"){
+LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "nrd0"){
   if (!(c("ceteris_paribus_explainer") %in% class(cp)))
     stop("The LocalVariableImportanceViaOscillations() function requires an object created with ceteris_paribus() function.")
   if (!c("data.frame") %in% class(df))
@@ -34,7 +34,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
     mean(cp$`_yhat_`[cp$`_vname_` == x])
   })
   names(avg_yhat) <- unique(cp$`_vname_`)
-  variableDensity <- apply(df[, unique(cp$`_vname_`)], 2, function(x){
+  variableDensity <- apply(df[, as.vector(unique(cp$`_vname_`))], 2, function(x){
     dx <- density(x, kernel = kernel_density, bw = bw_density)
   })
   weight <- lapply(unique(cp$`_vname_`), function(x) {approx(variableDensity[[as.character(x)]][["x"]],
