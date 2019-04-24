@@ -10,7 +10,7 @@ LazyData: true
 Suggests: knitr,
     rmarkdown,
     DALEX,
-    ceterisParibus,
+    ingredients,
     mlbench,
     randomForest,
     gridExtra,

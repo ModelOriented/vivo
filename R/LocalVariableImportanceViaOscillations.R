@@ -7,8 +7,6 @@
 #' @param absolute_deviation logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares
 #' @param point logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average CP
 #' @param density logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted
-#' @param kernel_density a character string giving the smoothing kernel to be used. This must partially match one of "gaussian", "rectangular", "triangular", "epanechnikov", "biweight", "cosine" or "optcosine", with default "gaussian", and may be abbreviated to a unique prefix (single letter).
-#' @param bw_density the smoothing bandwidth to be used. The default is "nrd0".
 #'
 #' @return A list of the class 'local_variable_importance'.
 #' It's a list with calculated local variable importance measure.
@@ -24,7 +22,7 @@
 #'
 
 
-LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = TRUE, kernel_density = "gaussian", bw_density = "nrd0"){
+LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = TRUE, point = TRUE, density = TRUE){
   if (!(c("ceteris_paribus_explainer") %in% class(cp)))
     stop("The LocalVariableImportanceViaOscillations() function requires an object created with ceteris_paribus() function.")
   if (!c("data.frame") %in% class(df))
@@ -34,21 +32,26 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
     mean(cp$`_yhat_`[cp$`_vname_` == x])
   })
   names(avg_yhat) <- unique(cp$`_vname_`)
-  variableDensity <- apply(df[, as.vector(unique(cp$`_vname_`))], 2, function(x){
-    dx <- density(x, kernel = kernel_density, bw = bw_density)
-  })
-  weight <- lapply(unique(cp$`_vname_`), function(x) {approx(variableDensity[[as.character(x)]][["x"]],
-                                                             variableDensity[[as.character(x)]][["y"]],
-                                                             xout = cp[cp$`_vname_` == x, as.character(x)])})
-  names(weight) <- unique(cp$`_vname_`)
+    # variableDensity <- apply(df[, as.vector(unique(cp$`_vname_`))], 2, function(x){
+    #   dx <- density(x, kernel = kernel_density, bw = bw_density)
+    # })
+  variable_split <- ingredients::calculate_variable_split(df, variables = colnames(df))
+
+  weight <- LocalVariableImportanceViaOscillations::CalculateWeight(cp, df, variable_split = variable_split)
+
+    # lapply(unique(cp$`_vname_`), function(x) {approx(variableDensity[[as.character(x)]][["x"]],
+    #                                                          variableDensity[[as.character(x)]][["y"]],
+    #                                                          xout = cp[cp$`_vname_` == x, as.character(x)])})
+    # names(weight) <- unique(cp$`_vname_`)
   obs <- attr(cp, "observations")
+
 
   if(absolute_deviation == TRUE){
     if(point == TRUE){
       if(density == TRUE){
         ## a=T, p=T, d=T
         result <- unlist(lapply(unique(cp$`_vname_`), function(m){
-          sum(abs(weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"]))))
+          sum(abs(weight[[m]] * (cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
         }))
       }else{
         ## a=T, p=T, d=F
@@ -60,7 +63,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
       if(density == TRUE){
         ## a=T, p=F, d=T
         result <- unlist(lapply(unique(cp$`_vname_`), function(m){
-          sum(abs(weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]]))
+          sum(abs(weight[[m]] *(cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])))
         }))
       }else{
         ## a=T, p=F, d=F
@@ -74,7 +77,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
       if(density == TRUE){
         ## a=F, p=T, d=T
         result <- unlist(lapply(unique(cp$`_vname_`), function(m){
-          sqrt(sum((weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
+          sqrt(sum((weight[[m]] * (cp[cp$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"]))))^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
         }))
       }else{
         ## a=F, p=T, d=F
@@ -86,7 +89,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
       if(density == TRUE){
         ## a=F, p=F, d=T
         result <- unlist(lapply(unique(cp$`_vname_`), function(m){
-          sqrt(sum((weight[[m]][["y"]] * cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
+          sqrt(sum((weight[[m]] * (cp[cp$`_vname_` == m, "_yhat_"] - avg_yhat[[m]]))^2)/length(cp[cp$`_vname_` == m, "_yhat_"]))
         }))
       }else{
         ## a=F, p=F, d=F
@@ -101,8 +104,8 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
   cat("absolute_deviation = ", absolute_deviation)
   cat("point = ", point)
   cat("density = ", density)
-  cat("kernel_density = ", kernel_density)
-  cat("bw_density = ", bw_density)
+  # cat("kernel_density = ", kernel_density)
+  # cat("bw_density = ", bw_density)
   cat("\n")
   cat("Results: \n")
   cat(paste0(unique(cp$`_vname_`), ": ", result, "\n"))
