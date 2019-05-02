@@ -117,7 +117,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
   #               variable_name = unique(cp$`_vname_`),
   #               result = data.frame(variable_name = unique(cp$`_vname_`), measure = result))
   lvivo = data.frame(variable_name = unique(cp$`_vname_`), measure = result)
-  class(lvivo) = c("local_variable_importance", "data.frame")
+  class(lvivo) = c("local_importance", "data.frame")
   lvivo
 
 

@@ -16,6 +16,7 @@ Suggests: knitr,
     gridExtra,
     grid,
     ggplot2,
-    lattice
+    lattice,
+    dplyr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

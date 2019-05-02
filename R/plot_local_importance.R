@@ -17,11 +17,12 @@
 
 plot.local_importance <- function(measure){
   df <- as.data.frame(measure)
-  ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(df$measure)]), ymin = 0, ymax = df$measure)) +
-    geom_errorbar() +
+  ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(df$measure)]), y = df$measure)) +
+    geom_bar(stat = "identity", width = 0.5) +
     coord_flip() +
     xlab("") +
     ylab("measure") +
     ggtitle("") +
-    theme_mi2()
-}
+    theme_drwhy_vertical() +
+    theme(legend.position = "none")
+  }
