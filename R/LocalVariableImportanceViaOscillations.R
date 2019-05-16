@@ -43,6 +43,7 @@ LocalVariableImportanceViaOscillations <- function(cp, df, absolute_deviation = 
     #                                                          variableDensity[[as.character(x)]][["y"]],
     #                                                          xout = cp[cp$`_vname_` == x, as.character(x)])})
     # names(weight) <- unique(cp$`_vname_`)
+  
   obs <- attr(cp, "observations")
 
 
