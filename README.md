@@ -1,8 +1,9 @@
 # LocalVariableImportanceViaOscillations
 
+
 [![Build
-Status](https://travis-ci.org/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](Status](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)](https://travis-ci.org/MI2DataLab/auditor)
-)
+Status](https://travis-ci.org/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)
+
 
 Local variable importance via oscillations of Ceteris Paribus profiles
 
