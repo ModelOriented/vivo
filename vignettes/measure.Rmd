@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ## Example with random forest regression model
 
 In this vignette we present measure for random forest regression model.
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, echo = FALSE, message = FALSE, include = TRUE}
 library(LocalVariableImportanceViaOscillations)
 library(DALEX)
 library(randomForest)
@@ -33,7 +33,7 @@ library(ggplot2)
 ### Dataset
 We work on Apartments dataset.
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, echo = FALSE, message = FALSE, include = TRUE}
 data(apartments)
 head(apartments)
 ```
@@ -42,7 +42,7 @@ head(apartments)
 
 Now, we define a model and use explain from `DALEX`.
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
                                       no.rooms, data = apartments)
 explainer_rf <- explain(apartments_rf_model,
@@ -51,7 +51,7 @@ explainer_rf <- explain(apartments_rf_model,
 
 We need to specify an observation. Let consider a new apartment with following attributes. 
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
 cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 ```
@@ -59,16 +59,16 @@ cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 
 Let see the Ceteris Paribus Plots calculted with `ceteris_paribus()` function.
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 plot(cp) + show_observations(cp)
 ```
 
 Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot.
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
-measure <- LocalVariableImportance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = FALSE)
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+measure <- LocalVariableImportance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
 ```
 
-```{r, warning = FALSE, echo = FALSE, message = FALSE}
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 plot(measure)
 ```

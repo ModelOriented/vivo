@@ -1,12 +1,11 @@
 # LocalVariableImportanceViaOscillations
 
 
-[![Build
-Status](https://travis-ci.org/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)
+[![Build Status](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)
 
+Local variable importance via oscillations of Ceteris Paribus profiles.
 
-Local variable importance via oscillations of Ceteris Paribus profiles
-
+This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculate in eight variants.
 
 ## Install 
 ```{r}

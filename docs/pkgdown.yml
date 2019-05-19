@@ -2,7 +2,5 @@ pandoc: 1.19.2.1
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
-  measure---problems-and-possible-solutions: measure---problems-and-possible-solutions.html
-  problems-with-kernel-density-estimation: problems-with-kernel-density-estimation.html
-  variable-importance-calculated-based-on-cp-profiles: variable-importance-calculated-based-on-cp-profiles.html
+  measure: measure.html
 
