@@ -48,9 +48,9 @@ test_that("calculate_weight_cp", {
 })
 
 test_that("calculate_weight_list", {
-  expect_error(CalculateWeight(explainer_rf, apartments[, 2:5], unlist(split)))
+  expect_error(CalculateWeight(cp, apartments[, 2:5], unlist(split)))
 })
 
 test_that("calculate_weight_data.frame", {
-  expect_error(CalculateWeight(explainer_rf, as.matrix(apartments[, 2:5]), split))
+  expect_error(CalculateWeight(cp, as.matrix(apartments[, 2:5]), split))
 })
