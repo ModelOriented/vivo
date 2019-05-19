@@ -1,0 +1,4 @@
+library(testthat)
+library(LocalVariableImportanceViaOscillations)
+
+test_check("LocalVariableImportanceViaOscillations")

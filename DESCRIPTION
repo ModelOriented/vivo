@@ -10,13 +10,15 @@ LazyData: true
 Imports: ggplot2,
   dplyr,
   ingredients
-Suggests: knitr,
-  rmarkdown,
-  DALEX,
-  mlbench,
-  randomForest,
-  gridExtra,
-  grid,
-  lattice,
+Suggests: 
+    knitr,
+    rmarkdown,
+    DALEX,
+    mlbench,
+    randomForest,
+    gridExtra,
+    grid,
+    lattice,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
