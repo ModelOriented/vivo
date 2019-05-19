@@ -5,24 +5,25 @@
 #' @param measure object returned from LocalVariableImportanceViaOscillations
 #'
 #' @return a ggplot2 object
-#' @export
+#'
 #' @examples
 #' \dontrun{
-#' measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
+#' measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 #' plot(measure)
 #' }
 #'
-#'
+#' @import ggplot2
+#' @export
 #'
 
 plot.local_importance <- function(measure){
   df <- as.data.frame(measure)
   ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(df$measure)]), y = df$measure)) +
-    geom_bar(stat = "identity", width = 0.5) +
+    geom_bar(stat = "identity", width = 0.5, fill = theme_drwhy_colors(1)) +
     coord_flip() +
     xlab("") +
     ylab("measure") +
     ggtitle("") +
     theme_drwhy_vertical() +
     theme(legend.position = "none")
-  }
+}

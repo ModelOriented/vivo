@@ -28,9 +28,8 @@ This function calculate local importance measure in eight variants.
 \examples{
 \dontrun{
 
-LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
+LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 
-LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "SJ")
 }
 
 }

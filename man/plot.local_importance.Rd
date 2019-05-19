@@ -17,10 +17,8 @@ Function plot.local_importance plots local importance measure based on Ceteris P
 }
 \examples{
 \dontrun{
-measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE, kernel_density = "gaussian", bw_density = "nrd0")
+measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 plot(measure)
 }
-
-
 
 }

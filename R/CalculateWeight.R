@@ -21,26 +21,25 @@ CalculateWeight <- function(cp, df, variable_split){
   if (!(c("ceteris_paribus_explainer") %in% class(cp)))
     stop("The CalculateWeight() function requires an object created with ceteris_paribus() function.")
   if (!(c("list") %in% class(variable_split)))
-      stop("The CalculateWeight() function requires an object created with calculate_variable_split() function.")
+    stop("The CalculateWeight() function requires an object created with calculate_variable_split() function.")
   if (!(c("data.frame") %in% class(df)))
-      stop("The CalculateWeight() function requires a data.frame.")
+    stop("The CalculateWeight() function requires a data.frame.")
   cut_range <- lapply(unique(cp$`_vname_`), function(x){
     data.frame(table(cut(df[, as.vector(as.character(x))],
-                        unique(c(min(df[, as.vector(as.character(x))]),
-                        variable_split[[as.character(x)]],
-                        max(df[, as.vector(as.character(x))]))), include.lowest = TRUE))/nrow(df))})
-  weight_range <- lapply(unique(cp$`_vname_`), function(x){
-    data.frame("Var1" = cut(cp[cp$`_vname_` == x, as.vector(as.character(x))],
                          unique(c(min(df[, as.vector(as.character(x))]),
                                   variable_split[[as.character(x)]],
-                                  max(df[, as.vector(as.character(x))]))), include.lowest = TRUE),
+                                  max(df[, as.vector(as.character(x))]))), include.lowest = TRUE))/nrow(df))})
+  weight_range <- lapply(unique(cp$`_vname_`), function(x){
+    data.frame("Var1" = cut(cp[cp$`_vname_` == x, as.vector(as.character(x))],
+                            unique(c(min(df[, as.vector(as.character(x))]),
+                                     variable_split[[as.character(x)]],
+                                     max(df[, as.vector(as.character(x))]))), include.lowest = TRUE),
                "Value" = cp[cp$`_vname_` == x, as.vector(as.character(x))])
-    })
+  })
   names(cut_range) <- as.vector(unique(cp$`_vname_`))
   names(weight_range) <- as.vector(unique(cp$`_vname_`))
-  #return(list("cut_range" = cut_range, "weight_range" = weight_range))
   weight <- lapply(as.vector(unique(cp$`_vname_`)), function(x){
-    unname(unlist(left_join(weight_range[[x]], cut_range[[x]], by = "Var1")["Freq"]))
+    unname(unlist(dplyr::left_join(weight_range[[x]], cut_range[[x]], by = "Var1")["Freq"]))
   })
   names(weight) <- as.vector(unique(cp$`_vname_`))
   weight

@@ -7,16 +7,16 @@ Depends: R (>= 3.4.3)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+Imports: ggplot2,
+  dplyr,
+  ingredients
 Suggests: knitr,
   rmarkdown,
   DALEX,
-  ingredients,
   mlbench,
   randomForest,
   gridExtra,
   grid,
-  ggplot2,
   lattice,
-  dplyr,
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

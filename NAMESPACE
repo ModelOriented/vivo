@@ -3,3 +3,4 @@
 S3method(plot,local_importance)
 export(CalculateWeight)
 export(LocalVariableImportanceViaOscillations)
+import(ggplot2)

@@ -1,0 +1,74 @@
+---
+title: "Example with random forest model"
+author: "Anna Kozak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Example with random forest regression model
+
+In this vignette we present measure for random forest regression model.
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+library(LocalVariableImportanceViaOscillations)
+library(DALEX)
+library(randomForest)
+library(ingredients)
+```
+
+```{r, include=FALSE, warning=FALSE, error=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+### Dataset
+We work on Apartments dataset.
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+data(apartments)
+head(apartments)
+```
+
+### Ranfom forest regression model
+
+Now, we define a model and use explain from `DALEX`.
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+                                      no.rooms, data = apartments)
+explainer_rf <- explain(apartments_rf_model,
+                        data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+```
+
+We need to specify an observation. Let consider a new apartment with following attributes. 
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
+cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
+```
+
+
+Let see the Ceteris Paribus Plots calculted with `ceteris_paribus()` function.
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+plot(cp) + show_observations(cp)
+```
+
+Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot.
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+measure <- LocalVariableImportanceViaOscillations(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = FALSE)
+```
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+plot(measure)
+```
