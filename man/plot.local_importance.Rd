@@ -4,10 +4,12 @@
 \alias{plot.local_importance}
 \title{Plot Local Variable Importance measure}
 \usage{
-\method{plot}{local_importance}(measure)
+\method{plot}{local_importance}(x, ...)
 }
 \arguments{
-\item{measure}{object returned from LocalVariableImportance}
+\item{x}{object returned from `LocalVariableImportance()` function}
+
+\item{...}{other parameters}
 }
 \value{
 a ggplot2 object

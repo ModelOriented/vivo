@@ -2,8 +2,8 @@
 #'
 #' Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 #'
-#' @param measure object returned from LocalVariableImportance
-#'
+#' @param x object returned from `LocalVariableImportance()` function
+#' @param ... other parameters
 #' @return a ggplot2 object
 #'
 #' @examples
@@ -13,11 +13,12 @@
 #' }
 #'
 #' @import ggplot2
+#' @import ingredients
 #' @export
 #'
 
-plot.local_importance <- function(measure){
-  df <- as.data.frame(measure)
+plot.local_importance <- function(x, ...){
+  df <- as.data.frame(x)
   ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(df$measure)]), y = df$measure)) +
     geom_bar(stat = "identity", width = 0.5, fill = theme_drwhy_colors(1)) +
     coord_flip() +
