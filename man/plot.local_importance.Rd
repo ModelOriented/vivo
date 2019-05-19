@@ -7,7 +7,7 @@
 \method{plot}{local_importance}(measure)
 }
 \arguments{
-\item{measure}{object returned from LocalVariableImportanceViaOscillations}
+\item{measure}{object returned from LocalVariableImportance}
 }
 \value{
 a ggplot2 object
@@ -17,7 +17,7 @@ Function plot.local_importance plots local importance measure based on Ceteris P
 }
 \examples{
 \dontrun{
-measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
+measure <- LocalVariableImportance(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 plot(measure)
 }
 

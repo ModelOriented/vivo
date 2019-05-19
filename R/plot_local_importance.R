@@ -2,13 +2,13 @@
 #'
 #' Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 #'
-#' @param measure object returned from LocalVariableImportanceViaOscillations
+#' @param measure object returned from LocalVariableImportance
 #'
 #' @return a ggplot2 object
 #'
 #' @examples
 #' \dontrun{
-#' measure <- LocalVariableImportanceViaOscillations(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
+#' measure <- LocalVariableImportance(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 #' plot(measure)
 #' }
 #'
