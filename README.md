@@ -4,6 +4,7 @@ The LocalVariableImportanceViaOscillations package - variable importance measure
 
 [![Build Status](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)
 [![codecov](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations/branch/master/graph/badge.svg)](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations) 
+
 This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculated in eight variants.
 
 Installation
