@@ -15,7 +15,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top navbar-mi2" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -62,29 +62,62 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
-    <div id="localvariableimportanceviaoscillations" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#localvariableimportanceviaoscillations" class="anchor"></a>LocalVariableImportanceViaOscillations</h1></div>
+  <div class="col-md-9 contents">
+    
 
-<p>Local variable importance via oscillations of Ceteris Paribus profiles.</p>
-<p>This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculate in eight variants.</p>
-<div id="install" class="section level2">
+    
+    
+<div id="the-localvariableimportanceviaoscillations-package---variable-importance-measure-based-on-ceteris-paribus-profiles" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#the-localvariableimportanceviaoscillations-package---variable-importance-measure-based-on-ceteris-paribus-profiles" class="anchor"></a>The LocalVariableImportanceViaOscillations package - variable importance measure based on Ceteris Paribus profiles</h1></div>
+<!-- [![Build Status](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations) -->
+<!-- [![codecov](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations/branch/master/graph/badge.svg)](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations) -->
+<p>This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculated in eight variants.</p>
+<div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#install" class="anchor"></a>Install</h2>
-<pre class="{r}"><code>install.packages("devtools")
-library(devtools)
-install_github("kozaka93/LocalVariableImportanceViaOscillations")</code></pre>
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(devtools)
+<span class="kw">install_github</span>(<span class="st">"kozaka93/LocalVariableImportanceViaOscillations"</span>)</code></pre></div>
+</div>
+<div id="intuition" class="section level2">
+<h2 class="hasAnchor">
+<a href="#intuition" class="anchor"></a>Intuition</h2>
+<p>Ceteris Paribus is a latin pharse meaning „other things held constant” or „all else unchanged”. Ceteris Paribus Plots are designed to present model response around a single point in the feature space. Shows how the model response depends on changes in a single input variable, keeping all other variables uncharged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.</p>
+<p>Let consider a example</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(LocalVariableImportanceViaOscillations)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(DALEX)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(randomForest)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ingredients)
+<span class="co">#data from DALEX package </span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(apartments)
+<span class="co">#model </span>
+apartments_rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span>
+<span class="st">                                      </span>no.rooms, <span class="dt">data =</span> apartments)
+explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apartments_rf_model,
+                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)
+<span class="co">#new observation</span>
+new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)
+cp &lt;-<span class="st"> </span>ingredients<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus">ceteris_paribus</a></span>(explainer_rf, new_apartment)
+
+<span class="co">#ceteris paribus plot</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(cp) <span class="op">+</span><span class="st"> </span><span class="kw">show_observations</span>(cp)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p>The value of the colored area is our measure, which we can calculated in eight variants. <img src="index_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#calculate measure with all parameter are true</span>
+measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/LocalVariableImportance.html">LocalVariableImportance</a></span>(cp, apartments, <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Results: 
+## construction.year: 197.031570424687
+##  surface: 308.757474818382
+##  floor: 242.119426015659
+##  no.rooms: 103.004172468187</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
-  	<div class="sidebar-logo">
-	 <p>
-		This package is developed by the <a href="http://mi2.mini.pw.edu.pl">MI^2 group</a>. MI^2 (pronounce: Am I square?) is a group of mathematicians and computer scientists that love to play with data. We create tools, do consulting and share our positive attitude. 
-	 </p>
-	</div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
@@ -98,13 +131,8 @@ install_github("kozaka93/LocalVariableImportanceViaOscillations")</code></pre>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations"><img src="https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master" alt="Build Status"></a></li>
-</ul>
-</div>
-</div>
+      </div>
+
 </div>
 
 

@@ -67,7 +67,7 @@
       <h1>Example with random forest model</h1>
                         <h4 class="author">Anna Kozak</h4>
             
-            <h4 class="date">2019-05-19</h4>
+            <h4 class="date">2019-05-22</h4>
       
       
       <div class="hidden name"><code>measure.Rmd</code></div>
@@ -109,10 +109,10 @@ cp &lt;-<span class="st"> </span>ingredients<span class="op">::</span><span clas
 <p>Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">measure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/LocalVariableImportance.html">LocalVariableImportance</a></span>(cp, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)
 <span class="co">#&gt; Results: </span>
-<span class="co">#&gt; construction.year: 221.523022710416</span>
-<span class="co">#&gt;  surface: 287.786027086219</span>
-<span class="co">#&gt;  floor: 257.932620939541</span>
-<span class="co">#&gt;  no.rooms: 84.9031490125768</span></code></pre></div>
+<span class="co">#&gt; construction.year: 190.910052800922</span>
+<span class="co">#&gt;  surface: 304.967582402817</span>
+<span class="co">#&gt;  floor: 252.819430258737</span>
+<span class="co">#&gt;  no.rooms: 83.9078913915707</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
 <p><img src="measure_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
