@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Local Variable Importance measure — plot.local_importance • LocalVariableImportanceViaOscillations</title>
+<title>Plot Local Variable Importance measure — plot.local_importance • vivo</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -103,7 +103,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>object returned from `LocalVariableImportance()` function</p></td>
+      <td><p>object returned from `local_variable_importance()` function</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -118,7 +118,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='LocalVariableImportance.html'>LocalVariableImportance</a></span>(<span class='no'>cp</span>, <span class='no'>df</span>, <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>data</span>, <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>measure</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
