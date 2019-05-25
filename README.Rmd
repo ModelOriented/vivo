@@ -4,10 +4,10 @@ output: github_document
 
 # The vivo package - variable importance measure based on Ceteris Paribus profiles
 
-[![Build Status](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations.svg?branch=master)](https://travis-ci.com/kozaka93/LocalVariableImportanceViaOscillations)
+[![Build Status](https://travis-ci.com/kozaka93/vivo.svg?branch=master)](https://travis-ci.com/kozaka93/vivo)
 
 
-[![codecov](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations/branch/master/graph/badge.svg)](https://codecov.io/gh/kozaka93/LocalVariableImportanceViaOscillations)
+[![codecov](https://codecov.io/gh/kozaka93/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/kozaka93/vivo)
 
 
 
