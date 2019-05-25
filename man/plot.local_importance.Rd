@@ -7,7 +7,7 @@
 \method{plot}{local_importance}(x, ...)
 }
 \arguments{
-\item{x}{object returned from `LocalVariableImportance()` function}
+\item{x}{object returned from `local_variable_importance()` function}
 
 \item{...}{other parameters}
 }
@@ -19,7 +19,7 @@ Function plot.local_importance plots local importance measure based on Ceteris P
 }
 \examples{
 \dontrun{
-measure <- LocalVariableImportance(cp, df, absolute_deviation = TRUE, point = TRUE, density = FALSE)
+measure <- local_variable_importance(profiles, data, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 plot(measure)
 }
 

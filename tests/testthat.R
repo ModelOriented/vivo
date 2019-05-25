@@ -1,4 +1,4 @@
 library(testthat)
-library(LocalVariableImportanceViaOscillations)
+library(vivo)
 
-test_check("LocalVariableImportanceViaOscillations")
+test_check("vivo")

@@ -19,54 +19,61 @@ knitr::opts_chunk$set(
 ## Example with random forest regression model
 
 In this vignette we present measure for random forest regression model.
-```{r, warning = FALSE, echo = FALSE, message = FALSE, include = TRUE}
-library(LocalVariableImportanceViaOscillations)
-library(DALEX)
-library(randomForest)
-library(ingredients)
-```
+
 
 ```{r, include=FALSE, warning=FALSE, error=FALSE, message=FALSE}
-library(dplyr)
-library(ggplot2)
+library("dplyr")
+library("ggplot2")
 ```
-### Dataset
-We work on Apartments dataset.
+### 1 Dataset
+
+We work on Apartments dataset from `DALEX` package.
 
 ```{r, warning = FALSE, echo = FALSE, message = FALSE, include = TRUE}
+library("DALEX")
 data(apartments)
 head(apartments)
 ```
 
-### Ranfom forest regression model
+### 2 Random forest regression model
 
-Now, we define a model and use explain from `DALEX`.
+Now, we define a random forest regression model and use explain from `DALEX`.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+library("randomForest")
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
                                       no.rooms, data = apartments)
 explainer_rf <- explain(apartments_rf_model,
                         data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
 ```
 
-We need to specify an observation. Let consider a new apartment with following attributes. 
+
+### 3 New observation
+
+We need to specify an observation. Let consider a new apartment with following attributes. Moreover we calculate predict value for this new observation.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
-cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
+predict(apartments_rf_model, new_apartment)
 ```
 
+### 4 Calculate Ceteris Paribus profiles
 
 Let see the Ceteris Paribus Plots calculted with `ceteris_paribus()` function.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
-plot(cp) + show_observations(cp)
+library("ingredients")
+profiles <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
+plot(profiles) + show_observations(profiles)
 ```
 
-Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot.
+### 5 Calculate measure of local varable importance
+
+Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot. We use variant with all parametres equals TRUE.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
-measure <- LocalVariableImportance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
+library("vivo")
+measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
 ```
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}

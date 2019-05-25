@@ -1,9 +1,9 @@
-library(LocalVariableImportanceViaOscillations)
-library(DALEX)
-library(randomForest)
-library(ingredients)
-library(dplyr)
-library(ggplot2)
+library("vivo")
+library("DALEX")
+library("randomForest")
+library("ingredients")
+library("dplyr")
+library("ggplot2")
 
 data(apartments)
 
@@ -19,4 +19,4 @@ cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 
 split <- ingredients::calculate_variable_split(apartments[, 2:5], variables = colnames(apartments[, 2:5]))
 
-measure <- LocalVariableImportance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
+measure <- local_variable_importance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
