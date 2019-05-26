@@ -43,6 +43,7 @@ test_that("ceteris_paribus_explainer", {
   expect_error(local_variable_importance(explainer_rf, apartments[, 2:5]))
 })
 
+
 test_that("calculate_weight_cp", {
   expect_error(calculate_weight(explainer_rf, apartments[, 2:5], split))
 })

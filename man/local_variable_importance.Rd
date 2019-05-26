@@ -19,17 +19,37 @@ local_variable_importance(profiles, data, absolute_deviation = TRUE,
 \item{density}{logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted}
 }
 \value{
-A list of the class 'local_variable_importance'.
-It's a list with calculated local variable importance measure.
+A data.frame of the class 'local_variable_importance'.
+It's a data.frame with calculated local variable importance measure.
 }
 \description{
 This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`.
 }
 \examples{
-\dontrun{
+\donttest{
 
-local_variable_importance(profiles, data, absolute_deviation = TRUE, point = TRUE, density = FALSE)
+library("DALEX")
+data(apartments)
 
+library("randomForest")
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor + no.rooms, data = apartments)
+
+explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+
+new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
+
+library("ingredients")
+profiles <- ceteris_paribus(explainer_rf, new_apartment)
+
+library("vivo")
+measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
+measure
+
+measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = FALSE)
+measure
+
+measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = FALSE, density = TRUE)
+measure
 }
 
 }

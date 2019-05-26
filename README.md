@@ -76,9 +76,10 @@ plot(profiles) + geom_ribbon(aes(ymin = y_predict, ymax = predict(apartments_rf_
 library("vivo")
 
 #calculate measure with all parameter are true
-measure <- local_variable_importance(cp, apartments, absolute_deviation = TRUE, point = TRUE, density = TRUE)
+measure <- local_variable_importance(profiles, apartments, absolute_deviation = TRUE, point = TRUE, density = TRUE)
 
 plot(measure)
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+For the new observation the most important variable is surface, then floor, construction.year and no.rooms.

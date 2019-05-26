@@ -120,10 +120,51 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>split</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>ingredients</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/calculate_variable_split'>calculate_variable_split</a></span>(<span class='no'>data</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>data</span>))
-<span class='fu'>calculate_weight</span>(<span class='no'>profiles</span>, <span class='no'>data</span>, <span class='kw'>variable_split</span> <span class='kw'>=</span> <span class='no'>split</span>)
-<span class='co'># }</span><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"DALEX"</span>)</div><div class='output co'>#&gt; <span class='message'>Welcome to DALEX (version: 0.3.0).</span>
+#&gt; <span class='message'>This is a plain DALEX. Use 'install_dependencies()' to get all required packages.</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>apartments</span>)
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"ingredients"</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Dołączanie pakietu: 'ingredients'</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z 'package:DALEX':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    theme_drwhy, theme_drwhy_colors, theme_drwhy_vertical</span></div><div class='output co'>#&gt; <span class='message'>Następujący obiekt został zakryty z 'package:testthat':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    describe</span></div><div class='input'><span class='no'>split</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/calculate_variable_split'>calculate_variable_split</a></span>(<span class='no'>apartments</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>apartments</span>))
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"randomForest"</span>)</div><div class='output co'>#&gt; <span class='message'>randomForest 4.6-14</span></div><div class='output co'>#&gt; <span class='message'>Type rfNews() to see new features/changes/bug fixes.</span></div><div class='input'><span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>construction.year</span> <span class='kw'>=</span> <span class='fl'>1998</span>, <span class='kw'>surface</span> <span class='kw'>=</span> <span class='fl'>88</span>, <span class='kw'>floor</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>no.rooms</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
+
+<span class='fu'>calculate_weight</span>(<span class='no'>profiles</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>[, <span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>variable_split</span> <span class='kw'>=</span> <span class='no'>split</span>)</div><div class='output co'>#&gt; $construction.year
+#&gt;  [1] 0.015 0.015 0.013 0.005 0.012 0.012 0.011 0.016 0.011 0.015 0.019 0.019
+#&gt; [13] 0.008 0.011 0.012 0.013 0.011 0.011 0.012 0.008 0.014 0.011 0.013 0.013
+#&gt; [25] 0.012 0.013 0.014 0.013 0.014 0.014 0.017 0.011 0.008 0.010 0.008 0.009
+#&gt; [37] 0.024 0.024 0.018 0.011 0.016 0.010 0.009 0.010 0.010 0.022 0.022 0.018
+#&gt; [49] 0.018 0.016 0.011 0.010 0.018 0.010 0.009 0.006 0.016 0.017 0.017 0.008
+#&gt; [61] 0.016 0.016 0.011 0.006 0.013 0.009 0.017 0.009 0.015 0.008 0.012 0.015
+#&gt; [73] 0.012 0.015 0.011 0.016 0.009 0.013 0.015 0.012 0.012 0.007 0.009 0.009
+#&gt; [85] 0.010 0.015 0.014 0.014 0.014 0.010 0.012 0.003
+#&gt; 
+#&gt; $surface
+#&gt;   [1] 0.013 0.013 0.007 0.013 0.010 0.005 0.014 0.014 0.014 0.006 0.009 0.011
+#&gt;  [13] 0.014 0.014 0.007 0.014 0.006 0.008 0.013 0.012 0.012 0.008 0.008 0.015
+#&gt;  [25] 0.009 0.014 0.004 0.008 0.011 0.012 0.008 0.011 0.011 0.012 0.006 0.014
+#&gt;  [37] 0.006 0.012 0.013 0.013 0.005 0.011 0.012 0.011 0.011 0.006 0.016 0.008
+#&gt;  [49] 0.009 0.007 0.017 0.017 0.016 0.016 0.008 0.016 0.018 0.018 0.012 0.012
+#&gt;  [61] 0.009 0.007 0.012 0.012 0.021 0.015 0.011 0.010 0.009 0.009 0.009 0.009
+#&gt;  [73] 0.014 0.014 0.011 0.008 0.008 0.010 0.012 0.011 0.024 0.024 0.005 0.016
+#&gt;  [85] 0.011 0.007 0.010 0.010 0.010 0.010 0.007 0.018 0.018 0.009 0.004 0.009
+#&gt;  [97] 0.007 0.010 0.009 0.004
+#&gt; 
+#&gt; $floor
+#&gt;  [1] 0.090 0.116 0.087 0.086 0.095 0.104 0.103 0.103 0.108 0.108
+#&gt; 
+#&gt; $no.rooms
+#&gt; [1] 0.301 0.301 0.231 0.223 0.198 0.047
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

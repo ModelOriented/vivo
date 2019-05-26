@@ -90,3 +90,5 @@ measure <- local_variable_importance(profiles, apartments, absolute_deviation = 
 
 plot(measure)
 ```
+
+For the new observation the most important variable is surface, then floor, construction.year and no.rooms.

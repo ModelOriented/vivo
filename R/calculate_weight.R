@@ -9,10 +9,23 @@
 #' @return Return an weight based on empirical density.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' library("DALEX")
+#' data(apartments)
 #'
-#' split <- ingredients::calculate_variable_split(data, variables = colnames(data))
-#' calculate_weight(profiles, data, variable_split = split)
+#' library("ingredients")
+#' split <- calculate_variable_split(apartments, variables = colnames(apartments))
+#'
+#' library("randomForest")
+#' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor + no.rooms, data = apartments)
+#'
+#' explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+#'
+#' new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
+#'
+#' profiles <- ceteris_paribus(explainer_rf, new_apartment)
+#'
+#' calculate_weight(profiles, data = apartments[, 2:5], variable_split = split)
 #' }
 #'
 #' @export
