@@ -120,7 +120,7 @@ profiles &lt;-<span class="st"> </span>ingredients<span class="op">::</span><spa
 <div id="measure-based-on-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">
 <a href="#measure-based-on-ceteris-paribus-profiles" class="anchor"></a>4 Measure based on Ceteris Paribus profiles</h3>
-<p>The value of the colored area is our measure, which we can calculated in eight variants.</p>
+<p>The value of the colored area is our measure, which we can calculated in eight variants. We obtain eight variants measure through the possible options of three parameters such as <code>absolute_deviation</code>, <code>point</code> and <code>density</code>. The measure is local variable importance for the new observation.</p>
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"vivo"</span>)
 
@@ -129,7 +129,7 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/local_
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<p>For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
+<p>We calculated measure with parameters <code>absolute_deviation</code>, <code>point</code> and <code>density</code> equal true. For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
 </div>
 </div>
 </div>

@@ -42,14 +42,12 @@ library("ingredients")
 profiles <- ceteris_paribus(explainer_rf, new_apartment)
 
 library("vivo")
-measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
-measure
+local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
 
-measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = FALSE)
-measure
+local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = FALSE)
 
-measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = FALSE, density = TRUE)
-measure
+local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = FALSE, density = TRUE)
+
 }
 
 }

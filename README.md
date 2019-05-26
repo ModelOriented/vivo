@@ -62,7 +62,7 @@ plot(profiles) + show_observations(profiles)
 
 ### 4 Measure based on Ceteris Paribus profiles
 
-The value of the colored area is our measure, which we can calculated in eight variants.
+The value of the colored area is our measure, which we can calculated in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`. The measure is local variable importance for the new observation.
 
 ```{r, message=FALSE, warning=FALSE, error=FALSE, include=TRUE, echo = FALSE}
 y_predict = predict(apartments_rf_model, new_apartment)
@@ -82,4 +82,6 @@ plot(measure)
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+We calculated measure with parameters `absolute_deviation`, `point` and `density` equal true.
 For the new observation the most important variable is surface, then floor, construction.year and no.rooms.

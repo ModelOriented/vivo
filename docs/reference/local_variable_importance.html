@@ -145,24 +145,22 @@ It's a data.frame with calculated local variable importance measure.</p>
 <span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"vivo"</span>)
-<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>measure</span></div><div class='output co'>#&gt;       variable_name  measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 232.8945
 #&gt; 2           surface 293.4722
 #&gt; 3             floor 250.3048
 #&gt; 4          no.rooms 100.7414</div><div class='input'>
-<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>measure</span></div><div class='output co'>#&gt;       variable_name    measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;       variable_name    measure
 #&gt; 1 construction.year 17678.6327
 #&gt; 2           surface 27256.3841
 #&gt; 3             floor  2427.2493
 #&gt; 4          no.rooms   561.1966</div><div class='input'>
-<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>measure</span></div><div class='output co'>#&gt;       variable_name  measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 171.1245
 #&gt; 2           surface 309.2562
 #&gt; 3             floor 184.9874
 #&gt; 4          no.rooms 112.7489</div><div class='input'>
+</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

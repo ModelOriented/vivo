@@ -109,7 +109,7 @@ explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apart
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(apartments_rf_model, new_apartment)
 <span class="co">#&gt;        1 </span>
-<span class="co">#&gt; 3864.471</span></code></pre></div>
+<span class="co">#&gt; 3882.949</span></code></pre></div>
 </div>
 <div id="calculate-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">
@@ -128,7 +128,7 @@ profiles &lt;-<span class="st"> </span>ingredients<span class="op">::</span><spa
 measure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_variable_importance.html">local_variable_importance</a></span>(profiles, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
 <p><img src="measure_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<p>For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
+<p>We calculated measure with parameters <code>absolute_deviation</code>, <code>point</code> and <code>density</code> equal true. For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
 </div>
 </div>
   </div>
