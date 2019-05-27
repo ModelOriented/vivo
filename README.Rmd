@@ -25,7 +25,9 @@ install_github("kozaka93/vivo")
 
 ## Intuition
 
-Ceteris Paribus is a latin pharse meaning „other things held constant” or  „all else unchanged”. Ceteris Paribus Plots are designed to present model response around a single point in the feature space. Shows how the model response depends on changes in a single input variable, keeping all other variables uncharged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.
+Ceteris Paribus is a latin pharse meaning „other things held constant” or  „all else unchanged”. Ceteris Paribus Plots shows how the model response depends on changes in a single input variable, keeping all other variables uncharged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.
+
+The measure is based on Ceteris Paribus profiles oscillations. In particular, the larger influence of an explanatory variable on prediction at a particular instance, the larger the deviation along the corresponding Ceteris Paribus profile. For a variable that exercises little or no influence on model prediction, the profile will be flat or will barely change. 
 
 Let consider a example
 
@@ -60,26 +62,31 @@ explainer_rf <- explain(apartments_rf_model,
 
 #### 3 Ceteris Paribus profiles
 
+Now, we calculate Ceteris Paribus profiles for new observation.
+
 ```{r, message=FALSE, warning=FALSE}
-library("ingredients")
-
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
-#calcutale ceteris paribus profiles
-profiles <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 
-#ceteris paribus plot
+library("ingredients")
+#calcutale ceteris paribus profiles
+profiles <- ceteris_paribus(explainer_rf, new_apartment)
+
+#plot ceteris paribus
 plot(profiles) + show_observations(profiles)
 ```
 
 ### 4 Measure based on Ceteris Paribus profiles
 
-The value of the colored area is our measure, which we can calculated in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`. The measure is local variable importance for the new observation.
+The value of the colored area is our measure. The larger area, the more important is the variable.
 
 ```{r, message=FALSE, warning=FALSE, error=FALSE, include=TRUE, echo = FALSE}
 y_predict = predict(apartments_rf_model, new_apartment)
 plot(profiles) + geom_ribbon(aes(ymin = y_predict, ymax = predict(apartments_rf_model, profiles)),
             alpha = 1,fill = '#47bac2') + geom_hline(yintercept = y_predict, colour = theme_drwhy_colors(1)) +show_observations(profiles)  
 ```
+
+
+We calculated measure with parameters `absolute_deviation`, `point` and `density` equal to true. This means that the deviation is calculated as a distance from observation, not from the average. Measure is weighted based on the density of variable and we use absolute deviation. 
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -92,5 +99,4 @@ plot(measure)
 ```
 
 
-We calculated measure with parameters `absolute_deviation`, `point` and `density` equal true.
 For the new observation the most important variable is surface, then floor, construction.year and no.rooms.

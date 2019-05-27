@@ -50,7 +50,7 @@ explainer_rf <- explain(apartments_rf_model,
 
 ### 3 New observation
 
-We need to specify an observation. Let consider a new apartment with following attributes. Moreover we calculate predict value for this new observation.
+We need to specify an observation. Let consider a new apartment with following attributes. Moreover, we calculate predict value for this new observation.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
@@ -59,7 +59,7 @@ predict(apartments_rf_model, new_apartment)
 
 ### 4 Calculate Ceteris Paribus profiles
 
-Let see the Ceteris Paribus Plots calculted with `ceteris_paribus()` function.
+Let see the Ceteris Paribus Plots calculated with `ceteris_paribus()` function.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 library("ingredients")
@@ -69,7 +69,7 @@ plot(profiles) + show_observations(profiles)
 
 ### 5 Calculate measure of local varable importance
 
-Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot. We use variant with all parametres equals TRUE.
+Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot. We use variant with all parameters equals to TRUE.
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 library("vivo")
@@ -81,5 +81,5 @@ plot(measure)
 ```
 
 
-We calculated measure with parameters `absolute_deviation`, `point` and `density` equal true.
+
 For the new observation the most important variable is surface, then floor, construction.year and no.rooms.
