@@ -70,11 +70,7 @@ plot(profiles) + show_observations(profiles)
 The value of the colored area is our measure. The larger area, the more important is the variable.
 
 
-```r
-y_predict = predict(apartments_rf_model, new_apartment)
-plot(profiles) + geom_ribbon(aes(ymin = y_predict, ymax = predict(apartments_rf_model, profiles)),
-            alpha = 1,fill = '#47bac2') + geom_hline(yintercept = y_predict, colour = theme_drwhy_colors(1)) +show_observations(profiles)  
-```
+
 ![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 We calculated measure with parameters `absolute_deviation`, `point` and `density` equal to true. This means that the deviation is calculated as a distance from observation, not from the average. Measure is weighted based on the density of variable and we use absolute deviation. 
