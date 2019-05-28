@@ -25,7 +25,7 @@ install_github("kozaka93/vivo")
 
 ## Intuition
 
-Ceteris Paribus is a latin pharse meaning „other things held constant” or  „all else unchanged”. Ceteris Paribus Plots shows how the model response depends on changes in a single input variable, keeping all other variables uncharged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.
+Ceteris Paribus is a latin pharse meaning „other things held constant” or  „all else unchanged”. Ceteris Paribus Plots shows how the model response depends on changes in a single input variable, keeping all other variables unchanged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.
 
 The measure is based on Ceteris Paribus profiles oscillations. In particular, the larger influence of an explanatory variable on prediction at a particular instance, the larger the deviation along the corresponding Ceteris Paribus profile. For a variable that exercises little or no influence on model prediction, the profile will be flat or will barely change. 
 
