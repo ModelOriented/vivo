@@ -8,6 +8,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' library("vivo", warn.conflicts = FALSE, quietly = TRUE)
 #' measure <- local_variable_importance(profiles, data, absolute_deviation = TRUE, point = TRUE, density = FALSE)
 #' plot(measure)
 #' }

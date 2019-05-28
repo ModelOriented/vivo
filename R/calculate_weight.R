@@ -10,13 +10,13 @@
 #'
 #' @examples
 #' \donttest{
-#' library("DALEX")
+#' library("DALEX", warn.conflicts = FALSE, quietly = TRUE)
 #' data(apartments)
 #'
-#' library("ingredients")
+#' library("ingredients", warn.conflicts = FALSE, quietly = TRUE)
 #' split <- calculate_variable_split(apartments, variables = colnames(apartments))
 #'
-#' library("randomForest")
+#' library("randomForest", warn.conflicts = FALSE, quietly = TRUE)
 #' apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor + no.rooms, data = apartments)
 #'
 #' explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
@@ -25,6 +25,7 @@
 #'
 #' profiles <- ceteris_paribus(explainer_rf, new_apartment)
 #'
+#' library("vivo")
 #' calculate_weight(profiles, data = apartments[, 2:5], variable_split = split)
 #' }
 #'
