@@ -2,8 +2,8 @@
 The vivo package - variable importance measure based on Ceteris Paribus profiles
 ==================================================================================================================
 
-[![Build Status](https://travis-ci.com/kozaka93/vivo.svg?branch=master)](https://travis-ci.com/kozaka93/vivo)
-[![codecov](https://codecov.io/gh/kozaka93/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/kozaka93/vivo)
+[![Build Status](https://travis-ci.org/MI2DataLab/vivo.svg?branch=master)](https://travis-ci.org/MI2DataLab/vivo/)
+[![Coverage Status](https://codecov.io/gh/MI2DataLab/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/MI2DataLab/vivo)
 
 This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculated in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`.
 
@@ -13,7 +13,7 @@ Installation
 ``` r
 install.packages("devtools")
 library("devtools")
-install_github("kozaka93/vivo")
+install_github("MI2DataLab/vivo")
 ```
 
 Intuition
