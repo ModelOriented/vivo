@@ -65,7 +65,7 @@ plot(profiles) + show_observations(profiles)
 ```
 ![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
-### 4 Measure based on Ceteris Paribus profiles
+#### 4 Measure based on Ceteris Paribus profiles
 
 The value of the colored area is our measure. The larger the area, the more important is the variable.
 

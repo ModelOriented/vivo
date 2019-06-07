@@ -73,7 +73,7 @@ profiles <- ceteris_paribus(explainer_rf, new_apartment)
 plot(profiles) + show_observations(profiles)
 ```
 
-### 4 Measure based on Ceteris Paribus profiles
+#### 4 Measure based on Ceteris Paribus profiles
 
 The value of the colored area is our measure. The larger the area, the more important is the variable.
 
