@@ -71,7 +71,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#the-vivo-package---variable-importance-measure-based-on-ceteris-paribus-profiles" class="anchor"></a>The vivo package - variable importance measure based on Ceteris Paribus profiles</h1></div>
 
-<p>This package is a tool for calculated variable importance. The measure is based on Ceteris Paribus plot and calculated in eight variants. We obtain eight variants measure through the possible options of three parameters such as <code>absolute_deviation</code>, <code>point</code> and <code>density</code>.</p>
+<p>This package is a tool to calculate variable importance. The measure is based on Ceteris Paribus plot and is calculated in eight variants. We obtain eight variants measure through the possible combinations of three parameters such as <code>absolute_deviation</code>, <code>point</code> and <code>density</code>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -82,9 +82,9 @@
 <div id="intuition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intuition" class="anchor"></a>Intuition</h2>
-<p>Ceteris Paribus is a latin pharse meaning „other things held constant” or „all else unchanged”. Ceteris Paribus Plots shows how the model response depends on changes in a single input variable, keeping all other variables unchanged. They are working for any Machine Learning model and allow for model comparisons to better understend how a black model is worinkg.</p>
+<p>Ceteris Paribus is a latin phrase meaning „other things held constant” or „all else unchanged”. Ceteris Paribus Plots show how the model response depends on changes in a single input variable, keeping all other variables unchanged. They work for any Machine Learning model and allow for model comparisons to better understand how a black model works.</p>
 <p>The measure is based on Ceteris Paribus profiles oscillations. In particular, the larger influence of an explanatory variable on prediction at a particular instance, the larger the deviation along the corresponding Ceteris Paribus profile. For a variable that exercises little or no influence on model prediction, the profile will be flat or will barely change.</p>
-<p>Let consider a example</p>
+<p>Let consider an example</p>
 <div id="dataset" class="section level4">
 <h4 class="hasAnchor">
 <a href="#dataset" class="anchor"></a>1 Dataset</h4>
@@ -111,7 +111,7 @@ explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apart
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)
 
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ingredients"</span>)
-<span class="co">#calcutale ceteris paribus profiles</span>
+<span class="co">#calculate ceteris paribus profiles</span>
 profiles &lt;-<span class="st"> </span><span class="kw">ceteris_paribus</span>(explainer_rf, new_apartment)
 
 <span class="co">#plot ceteris paribus</span>
@@ -121,9 +121,9 @@ profiles &lt;-<span class="st"> </span><span class="kw">ceteris_paribus</span>(e
 <div id="measure-based-on-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">
 <a href="#measure-based-on-ceteris-paribus-profiles" class="anchor"></a>4 Measure based on Ceteris Paribus profiles</h3>
-<p>The value of the colored area is our measure. The larger area, the more important is the variable.</p>
+<p>The value of the colored area is our measure. The larger the area, the more important is the variable.</p>
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>We calculated measure with parameters <code>absolute_deviation</code>, <code>point</code> and <code>density</code> equal to true. This means that the deviation is calculated as a distance from observation, not from the average. Measure is weighted based on the density of variable and we use absolute deviation.</p>
+<p>We calculated measure with <code>absolute_deviation</code>, <code>point</code> and <code>density</code> parameters equal to true. This means that the deviation is calculated as a distance from observation, not from the average. Measure is weighted based on the density of variable and we use absolute deviation.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"vivo"</span>)
 
 <span class="co">#calculate measure with all parameter are true</span>
@@ -133,6 +133,11 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/local_
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
 </div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<p>The package was created as a part of master’s diploma thesis at Warsaw University of Technology at Faculty of Mathematics and Information Science by Anna Kozak.</p>
 </div>
 </div>
   </div>
