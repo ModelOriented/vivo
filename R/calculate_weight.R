@@ -33,11 +33,11 @@
 #'
 calculate_weight <- function(profiles, data, variable_split){
   if (!(c("ceteris_paribus_explainer") %in% class(profiles)))
-    stop("The CalculateWeight() function requires an object created with ceteris_paribus() function.")
+    stop("The calculate_weight() function requires an object created with ceteris_paribus() function.")
   if (!(c("list") %in% class(variable_split)))
-    stop("The CalculateWeight() function requires an object created with calculate_variable_split() function.")
+    stop("The calculate_weight() function requires an object created with calculate_variable_split() function.")
   if (!(c("data.frame") %in% class(data)))
-    stop("The CalculateWeight() function requires a data.frame.")
+    stop("The calculate_weight() function requires a data.frame.")
   cut_range <- lapply(unique(profiles$`_vname_`), function(x){
     data.frame(table(cut(data[, as.vector(as.character(x))],
                          unique(c(min(data[, as.vector(as.character(x))]),

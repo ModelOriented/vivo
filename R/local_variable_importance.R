@@ -41,9 +41,9 @@
 
 local_variable_importance <- function(profiles, data, absolute_deviation = TRUE, point = TRUE, density = TRUE){
   if (!(c("ceteris_paribus_explainer") %in% class(profiles)))
-    stop("The LocalVariableImportance() function requires an object created with ceteris_paribus() function.")
+    stop("The local_variable_importance() function requires an object created with ceteris_paribus() function.")
   if (!c("data.frame") %in% class(data))
-    stop("The LocalVariableImportance() function requires a data.frame.")
+    stop("The local_variable_importance() function requires a data.frame.")
 
   avg_yhat <- lapply(unique(profiles$`_vname_`), function(x){
     mean(profiles$`_yhat_`[profiles$`_vname_` == x])
