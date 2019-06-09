@@ -1,2 +1,17 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^scss$
+^\.sass-cache$
+^\docs$
+^docs$
+.travis.yml
+_pkgdown.yaml
+runtime.txt
+install.R
+materials
+jupyter-notebooks
+^codecov\.yml$
+binder
+^_pkgdown\.yml$
+README.Rmd
+README_files
