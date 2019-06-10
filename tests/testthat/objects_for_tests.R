@@ -7,7 +7,7 @@ library("ggplot2")
 
 data(apartments)
 
-apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+apartments_rf_model <- randomForest::randomForest(m2.price ~ construction.year + surface + floor +
                                       no.rooms, data = apartments)
 
 explainer_rf <- explain(apartments_rf_model,
