@@ -4,9 +4,9 @@ author: "Anna Kozak"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Example with random forest model}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include = FALSE}
@@ -67,7 +67,7 @@ profiles <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 plot(profiles) + show_observations(profiles)
 ```
 
-### 5 Calculate measure of local varable importance
+### 5 Calculate measure of local variable importance
 
 Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot. We use variant with all parameters equals to TRUE.
 

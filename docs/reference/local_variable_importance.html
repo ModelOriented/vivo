@@ -69,9 +69,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/measure.html">Example with random forest model</a>
+      <a href="../articles/vignette_apartments.html">Example with random forest model</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -116,7 +119,7 @@
     </tr>
     <tr>
       <th>absolute_deviation</th>
-      <td><p>logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares</p></td>
+      <td><p>logical parameter, if `absolute_deviation = TRUE` then measure is calculated as absolute deviation, else is calculated as a root from average squares</p></td>
     </tr>
     <tr>
       <th>point</th>
@@ -140,9 +143,11 @@ It's a data.frame with calculated local variable importance measure.</p>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>apartments</span>)
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"randomForest"</span>)
-<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> + <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> +
+                                    <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 
-<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                        <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 
 <span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>construction.year</span> <span class='kw'>=</span> <span class='fl'>1998</span>, <span class='kw'>surface</span> <span class='kw'>=</span> <span class='fl'>88</span>, <span class='kw'>floor</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>no.rooms</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 
@@ -150,17 +155,20 @@ It's a data.frame with calculated local variable importance measure.</p>
 <span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
 
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"vivo"</span>)
-<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                          <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 232.8945
 #&gt; 2           surface 293.4722
 #&gt; 3             floor 250.3048
 #&gt; 4          no.rooms 100.7414</div><div class='input'>
-<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;       variable_name    measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                          <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;       variable_name    measure
 #&gt; 1 construction.year 17678.6327
 #&gt; 2           surface 27256.3841
 #&gt; 3             floor  2427.2493
 #&gt; 4          no.rooms   561.1966</div><div class='input'>
-<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                          <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 171.1245
 #&gt; 2           surface 309.2562
 #&gt; 3             floor 184.9874

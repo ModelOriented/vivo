@@ -12,7 +12,7 @@ local_variable_importance(profiles, data, absolute_deviation = TRUE,
 
 \item{data}{data.frame with raw data to model}
 
-\item{absolute_deviation}{logical parameter, if `absolute_deviation = TRUE` then measue is calculated as absolute deviation, else is calculated as a root from average squares}
+\item{absolute_deviation}{logical parameter, if `absolute_deviation = TRUE` then measure is calculated as absolute deviation, else is calculated as a root from average squares}
 
 \item{point}{logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles}
 

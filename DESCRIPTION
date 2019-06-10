@@ -1,5 +1,5 @@
 Package: vivo
-Title: Local variable importance via oscillations of Ceteris Paribus profiles
+Title: Local Variable Importance via Oscillations of Ceteris Paribus Profiles
 Version: 0.1.0
 Authors@R: c(person("Anna", "Kozak", email = "anna1993kozak@gmail.com", role = c("aut", "cre")),
             person("Przemyslaw", "Biecek", role = c("aut", "ths")))
