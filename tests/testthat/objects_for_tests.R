@@ -10,7 +10,7 @@ data(apartments)
 apartments_rf_model <- randomForest::randomForest(m2.price ~ construction.year + surface + floor +
                                       no.rooms, data = apartments)
 
-explainer_rf <- explain(apartments_rf_model,
+explainer_rf <- DALEX::explain(apartments_rf_model,
                         data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
 
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
