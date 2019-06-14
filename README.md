@@ -94,4 +94,6 @@ For the new observation the most important variable is surface, then floor, cons
 References
 ----------
 
+-  [Ceteris Paribus Plots](https://github.com/pbiecek/ceterisParibus)
+
 The package was created as a part of master's diploma thesis at Warsaw University of Technology at Faculty of Mathematics and Information Science by Anna Kozak.
