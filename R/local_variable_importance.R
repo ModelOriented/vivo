@@ -11,7 +11,7 @@
 #' @return A data.frame of the class 'local_variable_importance'.
 #' It's a data.frame with calculated local variable importance measure.
 #' @examples
-#' \donttest{
+#'
 #'
 #' library("DALEX")
 #' data(apartments)
@@ -38,7 +38,7 @@
 #' local_variable_importance(profiles, apartments[,2:5],
 #'                           absolute_deviation = TRUE, point = FALSE, density = TRUE)
 #'
-#' }
+#'
 #'
 #' @export
 #'

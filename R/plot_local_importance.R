@@ -7,7 +7,6 @@
 #' @return a ggplot2 object
 #'
 #' @examples
-#' \donttest{
 #'
 #' library("DALEX")
 #' data(apartments)
@@ -29,7 +28,7 @@
 #'                           absolute_deviation = TRUE, point = TRUE, density = FALSE)
 #'
 #' plot(measure)
-#' }
+#'
 #'
 #' @import ggplot2
 #' @import ingredients

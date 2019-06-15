@@ -18,7 +18,6 @@ a ggplot2 object
 Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 }
 \examples{
-\donttest{
 
 library("DALEX")
 data(apartments)
@@ -40,6 +39,6 @@ measure <- local_variable_importance(profiles, apartments[,2:5],
                           absolute_deviation = TRUE, point = TRUE, density = FALSE)
 
 plot(measure)
-}
+
 
 }

@@ -9,7 +9,7 @@
 #' @return Return an weight based on empirical density.
 #'
 #' @examples
-#' \donttest{
+#'
 #' library("DALEX", warn.conflicts = FALSE, quietly = TRUE)
 #' data(apartments)
 #'
@@ -29,7 +29,7 @@
 #'
 #' library("vivo")
 #' calculate_weight(profiles, data = apartments[, 2:5], variable_split = split)
-#' }
+#'
 #'
 #' @export
 #'

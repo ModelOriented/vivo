@@ -26,7 +26,7 @@ It's a data.frame with calculated local variable importance measure.
 This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`.
 }
 \examples{
-\donttest{
+
 
 library("DALEX")
 data(apartments)
@@ -53,6 +53,6 @@ local_variable_importance(profiles, apartments[,2:5],
 local_variable_importance(profiles, apartments[,2:5],
                           absolute_deviation = TRUE, point = FALSE, density = TRUE)
 
-}
+
 
 }
