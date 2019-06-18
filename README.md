@@ -2,18 +2,26 @@
 The vivo package - variable importance measure based on Ceteris Paribus profiles
 ==================================================================================================================
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vivo)](https://cran.r-project.org/package=vivo)
 [![Build Status](https://travis-ci.org/MI2DataLab/vivo.svg?branch=master)](https://travis-ci.org/MI2DataLab/vivo/)
 [![Coverage Status](https://codecov.io/gh/MI2DataLab/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/MI2DataLab/vivo)
 
-This package is a tool to calculate variable importance. The measure is based on Ceteris Paribus plot and is calculated in eight variants. We obtain eight variants measure through the possible combinations of three parameters such as `absolute_deviation`, `point` and `density`.
+This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters:  `absolute_deviation`, `point` and `density`.
 
 Installation
 ------------
 
+From CRAN
+
+``` r
+install.packages("vivo")
+```
+
+From GitHub
+
 ``` r
 install.packages("devtools")
-library("devtools")
-install_github("MI2DataLab/vivo")
+devtools::install_github("MI2DataLab/vivo")
 ```
 
 Intuition
