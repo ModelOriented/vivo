@@ -3,6 +3,7 @@ The vivo package - variable importance measure based on Ceteris Paribus profiles
 ==================================================================================================================
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vivo)](https://cran.r-project.org/package=vivo)
+<img src="http://cranlogs.r-pkg.org/badges/grand-total/vivo" />
 [![Build Status](https://travis-ci.org/MI2DataLab/vivo.svg?branch=master)](https://travis-ci.org/MI2DataLab/vivo/)
 [![Coverage Status](https://codecov.io/gh/MI2DataLab/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/MI2DataLab/vivo)
 
