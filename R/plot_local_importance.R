@@ -2,7 +2,7 @@
 #'
 #' Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.
 #'
-#' @param x object returned from `local_variable_importance()` function
+#' @param x object returned from \code{local_variable_importance()} function
 #' @param ... other parameters
 #' @return a ggplot2 object
 #'
@@ -31,7 +31,7 @@
 #'
 #'
 #' @import ggplot2
-#' @import ingredients
+#' @import DALEX
 #' @export
 #'
 

@@ -1,6 +1,6 @@
 Package: vivo
 Title: Local Variable Importance via Oscillations of Ceteris Paribus Profiles
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person("Anna", "Kozak", email = "anna1993kozak@gmail.com", role = c("aut", "cre")),
             person("Przemyslaw", "Biecek", role = c("aut", "ths")))
 Description: Provides an easy to calculate variable importance measure based on 
@@ -13,11 +13,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: ggplot2,
   dplyr,
-  ingredients
+  ingredients,
+  DALEX
 Suggests: 
     knitr,
     rmarkdown,
-    DALEX,
     mlbench,
     randomForest,
     gridExtra,

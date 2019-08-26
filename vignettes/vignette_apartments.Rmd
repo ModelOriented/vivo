@@ -73,7 +73,8 @@ Now, we calculated a measure of local variable importance via oscillation based 
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
 library("vivo")
-measure <- local_variable_importance(profiles, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
+measure <- local_variable_importance(profiles, apartments[,2:5], 
+            absolute_deviation = TRUE, point = TRUE, density = TRUE)
 ```
 
 ```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}

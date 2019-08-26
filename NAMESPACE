@@ -3,5 +3,5 @@
 S3method(plot,local_importance)
 export(calculate_weight)
 export(local_variable_importance)
+import(DALEX)
 import(ggplot2)
-import(ingredients)

@@ -7,7 +7,7 @@
 \method{plot}{local_importance}(x, ...)
 }
 \arguments{
-\item{x}{object returned from `local_variable_importance()` function}
+\item{x}{object returned from \code{local_variable_importance()} function}
 
 \item{...}{other parameters}
 }

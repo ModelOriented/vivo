@@ -17,6 +17,6 @@ new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, 
 
 cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
 
-split <- ingredients::calculate_variable_split(apartments[, 2:5], variables = colnames(apartments[, 2:5]))
+split <- ingredients:::calculate_variable_split.default(apartments[, 2:5], variables = colnames(apartments[, 2:5]))
 
 measure <- local_variable_importance(cp, apartments[,2:5], absolute_deviation = TRUE, point = TRUE, density = TRUE)
