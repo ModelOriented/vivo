@@ -26,5 +26,5 @@ Suggests:
     testthat
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
-URL: https://github.com/MI2DataLab/vivo
-BugReports: https://github.com/MI2DataLab/vivo/issues
+URL: https://github.com/ModelOriented/vivo
+BugReports: https://github.com/ModelOriented/vivo/issues

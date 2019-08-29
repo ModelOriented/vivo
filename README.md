@@ -4,8 +4,8 @@ The vivo package - variable importance measure based on Ceteris Paribus profiles
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vivo)](https://cran.r-project.org/package=vivo)
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/vivo" />
-[![Build Status](https://travis-ci.org/MI2DataLab/vivo.svg?branch=master)](https://travis-ci.org/MI2DataLab/vivo/)
-[![Coverage Status](https://codecov.io/gh/MI2DataLab/vivo/branch/master/graph/badge.svg)](https://codecov.io/gh/MI2DataLab/vivo)
+[![Build Status](https://api.travis-ci.org/ModelOriented/vivo.svg?branch=master)](https://travis-ci.org/ModelOriented/vivo)
+[![Coverage Status](https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg)](https://codecov.io/github/ModelOriented/vivo?branch=master)
 
 This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters:  `absolute_deviation`, `point` and `density`.
 
@@ -22,7 +22,7 @@ From GitHub
 
 ``` r
 install.packages("devtools")
-devtools::install_github("MI2DataLab/vivo")
+devtools::install_github("ModelOriented/vivo")
 ```
 
 Intuition
@@ -89,7 +89,8 @@ We calculated measure with `absolute_deviation`, `point` and `density` parameter
 library("vivo")
 
 #calculate measure with all parameter are true
-measure <- local_variable_importance(profiles, apartments, absolute_deviation = TRUE, point = TRUE, density = TRUE)
+measure <- local_variable_importance(profiles, apartments,
+                                     absolute_deviation = TRUE, point = TRUE, density = TRUE)
 
 plot(measure)
 ```
