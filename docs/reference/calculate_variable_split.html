@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • vivo</title>
+<title>Internal Function for Split Points for Selected Variables — calculate_variable_split • vivo</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -35,7 +35,13 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Internal Function for Split Points for Selected Variables — calculate_variable_split" />
+
+<meta property="og:description" content="This function calculate candidate splits for each selected variable.
+For numerical variables splits are calculated as percentiles
+(in general uniform quantiles of the length grid_points).
+For all other variables splits are calculated as unique values." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -59,7 +65,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -127,38 +133,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/ModelOriented/vivo/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Internal Function for Split Points for Selected Variables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ModelOriented/vivo/blob/master/R/calculate_variable_split.R'><code>R/calculate_variable_split.R</code></a></small>
+    <div class="hidden name"><code>calculate_variable_split.Rd</code></div>
     </div>
 
-    <div id="vivo-0-1-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#vivo-0-1-1" class="anchor"></a>vivo 0.1.1</h2>
-<ul>
-<li>fix in <code><a href="../reference/calculate_weight.html">calculate_weight()</a></code>, change in <code>ingredients</code> package</li>
-<li>add function <code><a href="../reference/calculate_variable_split.html">calculate_variable_split()</a></code>
-</li>
-</ul>
-</div>
-    <div id="vivo-0-1-0" class="section level2">
-<h2 class="hasAnchor">
-<a href="#vivo-0-1-0" class="anchor"></a>vivo 0.1.0</h2>
-<ul>
-<li>added tests</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>This function calculate candidate splits for each selected variable.
+For numerical variables splits are calculated as percentiles
+(in general uniform quantiles of the length grid_points).
+For all other variables splits are calculated as unique values.</p>
+    
+    </div>
 
+    <pre class="usage"><span class='fu'>calculate_variable_split</span>(<span class='no'>data</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>data</span>),
+  <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>validation dataset. Is used to determine distribution of observations.</p></td>
+    </tr>
+    <tr>
+      <th>variables</th>
+      <td><p>names of variables for which splits shall be calculated</p></td>
+    </tr>
+    <tr>
+      <th>grid_points</th>
+      <td><p>number of points used for response path</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A named list with splits for selected variables</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function is a copy of <code>calculate_varaible_split()</code> from <code>ingredients</code> package.</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#vivo-0-1-1">0.1.1</a></li>
-        <li><a href="#vivo-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#note">Note</a></li>
+          </ul>
+
+    <h2>Author</h2>
+    <p>Przemyslaw Biecek</p>
+  </div>
 </div>
 
       <footer>

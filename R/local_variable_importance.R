@@ -55,7 +55,7 @@ local_variable_importance <- function(profiles, data, absolute_deviation = TRUE,
   })
   names(avg_yhat) <- unique(profiles$`_vname_`)
 
-  variable_split <- ingredients:::calculate_variable_split.default(data, variables = colnames(data))
+  variable_split <- vivo::calculate_variable_split(data, variables = colnames(data))
 
   weight <- vivo::calculate_weight(profiles, data, variable_split = variable_split)
 

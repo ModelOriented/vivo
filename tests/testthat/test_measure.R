@@ -57,4 +57,10 @@ test_that("calculate_weight_list", {
   expect_error(calculate_weight(cp, apartments[, 2:5], unlist(split)))
 })
 
+test_that("calculate_variable_split", {
+  expect_error(calculate_variable_split(apartments[, 2:5], "name", 100))
+})
 
+test_that("calculate_variable_split", {
+  expect_true(is.list(calculate_variable_split(apartments[, 2:5], colnames(apartments)[2:5], 100)))
+})
