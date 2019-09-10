@@ -1,16 +1,15 @@
-
-The vivo package - variable importance measure based on Ceteris Paribus profiles
-==================================================================================================================
+# Variable importance measure based on Ceteris Paribus profiles <img src="man/figures/logo.png" align="right" width="150"/>
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vivo)](https://cran.r-project.org/package=vivo)
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/vivo" />
 [![Build Status](https://api.travis-ci.org/ModelOriented/vivo.svg?branch=master)](https://travis-ci.org/ModelOriented/vivo)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg)](https://codecov.io/github/ModelOriented/vivo?branch=master)
 
+## Overview
+
 This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters:  `absolute_deviation`, `point` and `density`.
 
-Installation
-------------
+## Installation
 
 From CRAN
 
@@ -25,8 +24,7 @@ install.packages("devtools")
 devtools::install_github("ModelOriented/vivo")
 ```
 
-Intuition
----------
+## Intuition
 
 Ceteris Paribus is a latin phrase meaning „other things held constant” or  „all else unchanged”. Ceteris Paribus Plots show how the model response depends on changes in a single input variable, keeping all other variables unchanged. They work for any Machine Learning model and allow for model comparisons to better understand how a black model works.
 
@@ -101,8 +99,7 @@ For the new observation the most important variable is surface, then floor, cons
 
 
 
-References
-----------
+## References
 
 -  [Ceteris Paribus Plots](https://github.com/pbiecek/ceterisParibus)
 
