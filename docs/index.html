@@ -15,6 +15,7 @@
   Ceteris Paribus plot and is calculated in eight variants. We obtain eight 
   variants measure through the possible combinations of three parameters such as 
   absolute_deviation, point and density.">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,7 +29,7 @@
 </script>
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -40,8 +41,6 @@
       </button>
 
       <div class="navbar-brand-container">
-      <a class="navbar-mi2logo" href="http://DrWhy.AI/">
-    <img src="https://github.com/ModelOriented/DrWhyTemplate/blob/master/inst/pkgdown/assets/drwhy_znak_violet_small.jpg?raw=true" alt="MI2" height="46" title="MI2"></a>
         <a class="navbar-brand" href="index.html">vivo</a>
         <div class="info">
           <span class="partof">part of the <a href="https://github.com/ModelOriented/DrWhy">DrWhy.AI</a>
@@ -54,7 +53,7 @@
       <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -78,7 +77,7 @@
 </li>
         <li>
   <a href="https://github.com/ModelOriented/vivo">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,25 +90,27 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<div id="the-vivo-package---variable-importance-measure-based-on-ceteris-paribus-profiles" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+<div id="variable-importance-measure-based-on-ceteris-paribus-profiles" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#the-vivo-package---variable-importance-measure-based-on-ceteris-paribus-profiles" class="anchor"></a>The vivo package - variable importance measure based on Ceteris Paribus profiles</h1></div>
+<a href="#variable-importance-measure-based-on-ceteris-paribus-profiles" class="anchor"></a>Variable importance measure based on Ceteris Paribus profiles <img src="reference/figures/logo.png" align="right" width="150">
+</h1></div>
 <p><a href="https://cran.r-project.org/package=vivo"><img src="http://www.r-pkg.org/badges/version/vivo" alt="CRAN_Status_Badge"></a> <img src="http://cranlogs.r-pkg.org/badges/grand-total/vivo"><a href="https://travis-ci.org/ModelOriented/vivo"><img src="https://api.travis-ci.org/ModelOriented/vivo.svg?branch=master" alt="Build Status"></a> <a href="https://codecov.io/github/ModelOriented/vivo?branch=master"><img src="https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg" alt="Coverage Status"></a></p>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
 <p>This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters: <code>absolute_deviation</code>, <code>point</code> and <code>density</code>.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>From CRAN</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"vivo"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"vivo"</span>)</a></code></pre></div>
 <p>From GitHub</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ModelOriented/vivo"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"ModelOriented/vivo"</span>)</a></code></pre></div>
 </div>
 <div id="intuition" class="section level2">
 <h2 class="hasAnchor">
@@ -121,49 +122,58 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <h4 class="hasAnchor">
 <a href="#dataset" class="anchor"></a>1 Dataset</h4>
 <p>We work on Apartments dataset from <code>DALEX</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"DALEX"</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(apartments)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"DALEX"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(apartments)</a></code></pre></div>
 </div>
 <div id="build-a-model" class="section level4">
 <h4 class="hasAnchor">
 <a href="#build-a-model" class="anchor"></a>2 Build a model</h4>
 <p>We define a random forest regression model.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"randomForest"</span>)
-<span class="co">#model</span>
-apartments_rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span>
-<span class="st">                                      </span>no.rooms, <span class="dt">data =</span> apartments)
-<span class="co">#explainer from DALEX</span>
-explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apartments_rf_model,
-                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"randomForest"</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#model</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">apartments_rf_model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">                                      </span>no.rooms, <span class="dt">data =</span> apartments)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#explainer from DALEX</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">explainer_rf &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/DALEX/man/explain.html">explain</a></span>(apartments_rf_model,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">## Preparation of a new explainer is initiated</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">##   -&gt; model label       :  randomForest  ([33mdefault[39m)</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">##   -&gt; data              :  9000  rows  4  cols </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">##   -&gt; target variable   :  9000  values </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">##   -&gt; predict function  :  yhat.randomForest  will be used ([33mdefault[39m)</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">##   -&gt; predicted values  :  numerical, min =  2129.022 , mean =  3515.944 , max =  5288.179  </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">##   -&gt; residual function :  difference between y and yhat ([33mdefault[39m)</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">##   -&gt; residuals         :  numerical, min =  -1238.443 , mean =  -4.420374 , max =  2126.688  </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">## [32mA new explainer has been created![39m</span></a></code></pre></div>
 </div>
 <div id="ceteris-paribus-profiles" class="section level4">
 <h4 class="hasAnchor">
 <a href="#ceteris-paribus-profiles" class="anchor"></a>3 Ceteris Paribus profiles</h4>
 <p>Now, we calculate Ceteris Paribus profiles for new observation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ingredients"</span>)
-<span class="co">#calculate ceteris paribus profiles</span>
-profiles &lt;-<span class="st"> </span><span class="kw">ceteris_paribus</span>(explainer_rf, new_apartment)
-
-<span class="co">#plot ceteris paribus</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(profiles) <span class="op">+</span><span class="st"> </span><span class="kw">show_observations</span>(profiles)</code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ingredients"</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#calculate ceteris paribus profiles</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">profiles &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ingredients/man/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf, new_apartment)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#plot ceteris paribus</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(profiles) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ingredients/man/show_observations.html">show_observations</a></span>(profiles)</a></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-6-1.png"><!-- --></p>
 </div>
 <div id="measure-based-on-ceteris-paribus-profiles" class="section level4">
 <h4 class="hasAnchor">
 <a href="#measure-based-on-ceteris-paribus-profiles" class="anchor"></a>4 Measure based on Ceteris Paribus profiles</h4>
 <p>The value of the colored area is our measure. The larger the area, the more important is the variable.</p>
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="README_files/figure-gfm/unnamed-chunk-7-1.png"><!-- --></p>
 <p>We calculated measure with <code>absolute_deviation</code>, <code>point</code> and <code>density</code> parameters equal to true. This means that the deviation is calculated as a distance from observation, not from the average. Measure is weighted based on the density of variable and we use absolute deviation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"vivo"</span>)
-
-<span class="co">#calculate measure with all parameter are true</span>
-measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/local_variable_importance.html">local_variable_importance</a></span>(profiles, apartments,
-                                     <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"vivo"</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#calculate measure with all parameter are true</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">measure &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/vivo/man/local_variable_importance.html">local_variable_importance</a></span>(profiles, apartments,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">                                     <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(measure)</a></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-8-1.png"><!-- --></p>
 <p>For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
 </div>
 </div>
@@ -204,8 +214,7 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/local_
 </ul>
 </div>
 
-      </div>
-
+  </div>
 </div>
 
 
@@ -215,10 +224,12 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="reference/local_
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
