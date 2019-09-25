@@ -8,10 +8,14 @@ output: github_document
 <img src="http://cranlogs.r-pkg.org/badges/grand-total/vivo" />
 [![Build Status](https://api.travis-ci.org/ModelOriented/vivo.svg?branch=master)](https://travis-ci.org/ModelOriented/vivo)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg)](https://codecov.io/github/ModelOriented/vivo?branch=master)
+[![DrWhy-eXtrAI](https://img.shields.io/badge/DrWhy-eXtrAI-4378bf)](http://drwhy.ai/#eXtraAI)
+
 
 ## Overview
 
 This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters:  `absolute_deviation`, `point` and `density`.
+
+`vivo` is a part of [DrWhy](drwhy.ai) collection of tools for Visual Exploration, Explanation and Debugging of Predictive Models.
 
 ## Installation
 

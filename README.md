@@ -6,6 +6,7 @@
 Status](https://api.travis-ci.org/ModelOriented/vivo.svg?branch=master)](https://travis-ci.org/ModelOriented/vivo)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg)](https://codecov.io/github/ModelOriented/vivo?branch=master)
+[![DrWhy-eXtrAI](https://img.shields.io/badge/DrWhy-eXtrAI-4378bf)](http://drwhy.ai/#eXtraAI)
 
 ## Overview
 
@@ -14,6 +15,8 @@ This package helps to calculate instance level variable importance
 profiles and can be calculated in eight variants. Select the variant
 that suits your needs by setting parameters: `absolute_deviation`,
 `point` and `density`.
+
+`vivo` is a part of [DrWhy](drwhy.ai) collection of tools for Visual Exploration, Explanation and Debugging of Predictive Models.
 
 ## Installation
 
@@ -72,14 +75,14 @@ explainer_rf <- explain(apartments_rf_model,
 ```
 
     ## Preparation of a new explainer is initiated
-    ##   -> model label       :  randomForest  ([33mdefault[39m)
+    ##   -> model label       :  randomForest  ([33mdefault[39m)
     ##   -> data              :  9000  rows  4  cols 
     ##   -> target variable   :  9000  values 
-    ##   -> predict function  :  yhat.randomForest  will be used ([33mdefault[39m)
+    ##   -> predict function  :  yhat.randomForest  will be used ([33mdefault[39m)
     ##   -> predicted values  :  numerical, min =  2129.022 , mean =  3515.944 , max =  5288.179  
-    ##   -> residual function :  difference between y and yhat ([33mdefault[39m)
+    ##   -> residual function :  difference between y and yhat ([33mdefault[39m)
     ##   -> residuals         :  numerical, min =  -1238.443 , mean =  -4.420374 , max =  2126.688  
-    ## [32mA new explainer has been created![39m
+    ## [32mA new explainer has been created![39m
 
 #### 3 Ceteris Paribus profiles
 

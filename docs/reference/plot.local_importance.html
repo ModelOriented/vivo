@@ -36,10 +36,11 @@
 
 
 <meta property="og:title" content="Plot Local Variable Importance measure — plot.local_importance" />
+
 <meta property="og:description" content="Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles." />
+
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
-
 
 
 
@@ -60,7 +61,6 @@
 
  gtag('config', 'UA-5650686-14');
 </script>
-
   </head>
 
   <body>
@@ -89,7 +89,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -113,7 +113,7 @@
 </li>
         <li>
   <a href="https://github.com/ModelOriented/vivo">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -124,7 +124,6 @@
 </div><!--/.navbar -->
 
       
-
       </header>
 
 <div class="row">
@@ -136,72 +135,69 @@
     </div>
 
     <div class="ref-description">
+    
     <p>Function plot.local_importance plots local importance measure based on Ceteris Paribus profiles.</p>
+    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for local_importance</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>object returned from <code>local_variable_importance()</code> function</p></td>
+      <td><p>object returned from <code><a href='local_variable_importance.html'>local_variable_importance()</a></code> function</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>other parameters</p></td>
     </tr>
     </table>
-
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a ggplot2 object</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"DALEX"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>apartments</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"DALEX"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>apartments</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"randomForest"</span>)
-<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/randomForest/man/randomForest.html'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> +
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"randomForest"</span>)
+<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/randomForest/topics/randomForest'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> +
                                     <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
 
-<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DALEX/man/explain.html'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
-                        <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)</div><div class='output co'>#&gt; Preparation of a new explainer is initiated
-#&gt;   -&gt; model label       :  randomForest  (<span style='color: #BBBB00;'>default</span><span>)
-#&gt;   -&gt; data              :  9000  rows  4  cols 
-#&gt;   -&gt; target variable   :  9000  values 
-#&gt;   -&gt; predict function  :  yhat.randomForest  will be used (</span><span style='color: #BBBB00;'>default</span><span>)
-#&gt;   -&gt; predicted values  :  numerical, min =  2089.041 , mean =  3515.347 , max =  5385.496  
-#&gt;   -&gt; residual function :  difference between y and yhat (</span><span style='color: #BBBB00;'>default</span><span>)
-#&gt;   -&gt; residuals         :  numerical, min =  -1275.189 , mean =  -3.823366 , max =  2087.207  
-#&gt; </span><span style='color: #00BB00;'>A new explainer has been created!</span><span></div><div class='input'>
-<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>construction.year</span> <span class='kw'>=</span> <span class='fl'>1998</span>, <span class='kw'>surface</span> <span class='kw'>=</span> <span class='fl'>88</span>, <span class='kw'>floor</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>no.rooms</span> <span class='kw'>=</span> <span class='fl'>3</span>)
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/DALEX/topics/explain'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                        <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"ingredients"</span>)
-<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ingredients/man/ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
+<span class='no'>new_apartment</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>construction.year</span> <span class='kw'>=</span> <span class='fl'>1998</span>, <span class='kw'>surface</span> <span class='kw'>=</span> <span class='fl'>88</span>, <span class='kw'>floor</span> <span class='kw'>=</span> <span class='fl'>2L</span>, <span class='kw'>no.rooms</span> <span class='kw'>=</span> <span class='fl'>3</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"vivo"</span>)
-<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/vivo/man/local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"ingredients"</span>)
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
+
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='st'>"vivo"</span>)
+<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
                           <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>measure</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Please note that 'theme_drwhy_colors()' is now deprecated, it is better to use 'colors_discrete_drwhy()' instead.</span></div><div class='img'><img src='plot.local_importance-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>measure</span>)</div><div class='img'><img src='plot.local_importance-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
-</div></span></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      
       <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
-
 
       <footer>
       <div class="author">
@@ -210,14 +206,11 @@
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
-
       </footer>
    </div>
 
   
 
-
   </body>
 </html>
-
 
