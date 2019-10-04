@@ -50,7 +50,7 @@
       <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -74,7 +74,7 @@
 </li>
         <li>
   <a href="https://github.com/ModelOriented/vivo">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -87,13 +87,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Example with random forest model</h1>
                         <h4 class="author">Anna Kozak</h4>
             
-            <h4 class="date">2019-09-24</h4>
+            <h4 class="date">2019-10-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ModelOriented/vivo/blob/master/vignettes/vignette_apartments.Rmd"><code>vignettes/vignette_apartments.Rmd</code></a></small>
       <div class="hidden name"><code>vignette_apartments.Rmd</code></div>
@@ -122,38 +123,47 @@
 <h3 class="hasAnchor">
 <a href="#random-forest-regression-model" class="anchor"></a>2 Random forest regression model</h3>
 <p>Now, we define a random forest regression model and use explain from <code>DALEX</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"randomForest"</span>)
-apartments_rf_model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span>
-<span class="st">                                      </span>no.rooms, <span class="dt">data =</span> apartments)
-explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apartments_rf_model,
-                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"randomForest"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">apartments_rf_model &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span>(m2.price <span class="op">~</span><span class="st"> </span>construction.year <span class="op">+</span><span class="st"> </span>surface <span class="op">+</span><span class="st"> </span>floor <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">                                      </span>no.rooms, <span class="dt">data =</span> apartments)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">explainer_rf &lt;-<span class="st"> </span><span class="kw">explain</span>(apartments_rf_model,</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">                        <span class="dt">data =</span> apartmentsTest[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], <span class="dt">y =</span> apartmentsTest<span class="op">$</span>m2.price)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; Preparation of a new explainer is initiated</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt;   -&gt; model label       :  randomForest  ( [33m default [39m )</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt;   -&gt; data              :  9000  rows  4  cols </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;   -&gt; target variable   :  9000  values </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;   -&gt; predict function  :  yhat.randomForest  will be used ( [33m default [39m )</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;   -&gt; predicted values  :  numerical, min =  2112.085 , mean =  3515.799 , max =  5382.763  </span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;   -&gt; residual function :  difference between y and yhat ( [33m default [39m )</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;   -&gt; residuals         :  numerical, min =  -1260.192 , mean =  -4.275188 , max =  2179.053  </span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  [32m A new explainer has been created! [39m</span></a></code></pre></div>
 </div>
 <div id="new-observation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#new-observation" class="anchor"></a>3 New observation</h3>
 <p>We need to specify an observation. Let consider a new apartment with following attributes. Moreover, we calculate predict value for this new observation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(apartments_rf_model, new_apartment)
-<span class="co">#&gt;        1 </span>
-<span class="co">#&gt; 3861.563</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">new_apartment &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">construction.year =</span> <span class="dv">1998</span>, <span class="dt">surface =</span> <span class="dv">88</span>, <span class="dt">floor =</span> 2L, <span class="dt">no.rooms =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(apartments_rf_model, new_apartment)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;       1 </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; 3875.36</span></a></code></pre></div>
 </div>
 <div id="calculate-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">
 <a href="#calculate-ceteris-paribus-profiles" class="anchor"></a>4 Calculate Ceteris Paribus profiles</h3>
-<p>Let see the Ceteris Paribus Plots calculated with <code>ceteris_paribus()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ingredients"</span>)
-profiles &lt;-<span class="st"> </span>ingredients<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/ingredients/topics/ceteris_paribus">ceteris_paribus</a></span>(explainer_rf, new_apartment)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(profiles) <span class="op">+</span><span class="st"> </span><span class="kw">show_observations</span>(profiles)</code></pre></div>
+<p>Let see the Ceteris Paribus Plots calculated with <code><a href="https://rdrr.io/pkg/ingredients/man/ceteris_paribus.html">ceteris_paribus()</a></code> function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ingredients"</span>)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">profiles &lt;-<span class="st"> </span>ingredients<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ingredients/man/ceteris_paribus.html">ceteris_paribus</a></span>(explainer_rf, new_apartment)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(profiles) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ingredients/man/show_observations.html">show_observations</a></span>(profiles)</a></code></pre></div>
 <p><img src="vignette_apartments_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div id="calculate-measure-of-local-variable-importance" class="section level3">
 <h3 class="hasAnchor">
 <a href="#calculate-measure-of-local-variable-importance" class="anchor"></a>5 Calculate measure of local variable importance</h3>
 <p>Now, we calculated a measure of local variable importance via oscillation based on Ceteris Paribus plot. We use variant with all parameters equals to TRUE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"vivo"</span>)
-measure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/local_variable_importance.html">local_variable_importance</a></span>(profiles, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], 
-            <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(measure)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"vivo"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">measure &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/vivo/man/local_variable_importance.html">local_variable_importance</a></span>(profiles, apartments[,<span class="dv">2</span><span class="op">:</span><span class="dv">5</span>], </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">            <span class="dt">absolute_deviation =</span> <span class="ot">TRUE</span>, <span class="dt">point =</span> <span class="ot">TRUE</span>, <span class="dt">density =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(measure)</a></code></pre></div>
 <p><img src="vignette_apartments_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>For the new observation the most important variable is surface, then floor, construction.year and no.rooms.</p>
 </div>
@@ -161,6 +171,7 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/loc
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -173,16 +184,19 @@ measure &lt;-<span class="st"> </span><span class="kw"><a href="../reference/loc
 </div>
 
 
+
       <footer><div class="author">
   <p>
     Developed by Anna Kozak, Przemyslaw Biecek.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
