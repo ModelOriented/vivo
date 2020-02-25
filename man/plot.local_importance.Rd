@@ -11,6 +11,8 @@
 \item{x}{object returned from \code{local_variable_importance()} function}
 
 \item{...}{other parameters}
+
+\item{title}{the plot's title, by default \code{'Local variable importance'}}
 }
 \value{
 a ggplot2 object

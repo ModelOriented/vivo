@@ -4,6 +4,7 @@
 #'
 #' @param x object returned from \code{local_variable_importance()} function
 #' @param ... other parameters
+#' @param title the plot's title, by default \code{'Local variable importance'}
 #' @return a ggplot2 object
 #'
 #' @examples
