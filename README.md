@@ -16,7 +16,10 @@ profiles and can be calculated in eight variants. Select the variant
 that suits your needs by setting parameters: `absolute_deviation`,
 `point` and `density`.
 
-`vivo` is a part of [DrWhy](drwhy.ai) collection of tools for Visual Exploration, Explanation and Debugging of Predictive Models.
+`vivo` is a part of
+[DrWhy](https://github.com/ModelOriented/DrWhy)
+collection of tools for Visual Exploration, Explanation and Debugging of
+Predictive Models.
 
 ## Installation
 
@@ -75,19 +78,19 @@ explainer_rf <- explain(apartments_rf_model,
 ```
 
     ## Preparation of a new explainer is initiated
-    ##   -> model label       :  randomForest  ([33mdefault[39m)
+    ##   -> model label       :  randomForest  ( [33m default [39m )
     ##   -> data              :  9000  rows  4  cols 
     ##   -> target variable   :  9000  values 
-    ##   -> predict function  :  yhat.randomForest  will be used ([33mdefault[39m)
-    ##   -> predicted values  :  numerical, min =  2129.022 , mean =  3515.944 , max =  5288.179  
-    ##   -> residual function :  difference between y and yhat ([33mdefault[39m)
-    ##   -> residuals         :  numerical, min =  -1238.443 , mean =  -4.420374 , max =  2126.688  
-    ## [32mA new explainer has been created![39m
+    ##   -> model_info        :  package randomForest , ver. 4.6.14 , task regression ( [33m default [39m ) 
+    ##   -> predict function  :  yhat.randomForest  will be used ( [33m default [39m )
+    ##   -> predicted values  :  numerical, min =  2112.703 , mean =  3516.96 , max =  5343.919  
+    ##   -> residual function :  difference between y and yhat ( [33m default [39m )
+    ##   -> residuals         :  numerical, min =  -1232.857 , mean =  -5.436286 , max =  2144.688  
+    ##  [32m A new explainer has been created! [39m
 
 #### 3 Ceteris Paribus profiles
 
-Now, we calculate Ceteris Paribus profiles for new
-observation.
+Now, we calculate Ceteris Paribus profiles for new observation.
 
 ``` r
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
@@ -135,4 +138,4 @@ floor, construction.year and no.rooms.
 
 The package was created as a part of master’s diploma thesis at Warsaw
 University of Technology at Faculty of Mathematics and Information
-Science by Anna Kozak.
+Science by [Anna Kozak](https://github.com/kozaka93).

@@ -12,18 +12,18 @@ local_variable_importance(profiles, data, absolute_deviation = TRUE,
 
 \item{data}{data.frame with raw data to model}
 
-\item{absolute_deviation}{logical parameter, if `absolute_deviation = TRUE` then measure is calculated as absolute deviation, else is calculated as a root from average squares}
+\item{absolute_deviation}{logical parameter, if \code{absolute_deviation = TRUE} then measure is calculated as absolute deviation, else is calculated as a root from average squares}
 
-\item{point}{logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles}
+\item{point}{logical parameter, if \code{point = TRUE} then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles}
 
-\item{density}{logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted}
+\item{density}{logical parameter, if \code{density = TRUE} then measure is weighted based on the density of variable, else is not weighted}
 }
 \value{
-A data.frame of the class 'local_variable_importance'.
+A data.frame of the class \code{local_variable_importance}.
 It's a data.frame with calculated local variable importance measure.
 }
 \description{
-This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`.
+This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as \code{absolute_deviation}, \code{point} and \code{density}.
 }
 \examples{
 

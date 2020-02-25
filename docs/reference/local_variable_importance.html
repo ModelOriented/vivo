@@ -36,7 +36,7 @@
 
 
 <meta property="og:title" content="Local Variable Importance measure based on Ceteris Paribus profiles. — local_variable_importance" />
-<meta property="og:description" content="This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`." />
+<meta property="og:description" content="This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as absolute_deviation, point and density." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -136,7 +136,7 @@
     </div>
 
     <div class="ref-description">
-    <p>This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as `absolute_deviation`, `point` and `density`.</p>
+    <p>This function calculate local importance measure in eight variants. We obtain eight variants measure through the possible options of three parameters such as <code>absolute_deviation</code>, <code>point</code> and <code>density</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>data</span>, <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -155,21 +155,21 @@
     </tr>
     <tr>
       <th>absolute_deviation</th>
-      <td><p>logical parameter, if `absolute_deviation = TRUE` then measure is calculated as absolute deviation, else is calculated as a root from average squares</p></td>
+      <td><p>logical parameter, if <code>absolute_deviation = TRUE</code> then measure is calculated as absolute deviation, else is calculated as a root from average squares</p></td>
     </tr>
     <tr>
       <th>point</th>
-      <td><p>logical parameter, if `point = TRUE` then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles</p></td>
+      <td><p>logical parameter, if <code>point = TRUE</code> then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles</p></td>
     </tr>
     <tr>
       <th>density</th>
-      <td><p>logical parameter, if `density = TRUE` then measure is weighted based on the density of variable, else is not weighted</p></td>
+      <td><p>logical parameter, if <code>density = TRUE</code> then measure is weighted based on the density of variable, else is not weighted</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame of the class 'local_variable_importance'.
+    <p>A data.frame of the class <code>local_variable_importance</code>.
 It's a data.frame with calculated local variable importance measure.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -187,6 +187,7 @@ It's a data.frame with calculated local variable importance measure.</p>
 #&gt;   -&gt; model label       :  randomForest  ( <span style='color: #BBBB00;'> default </span><span> )
 #&gt;   -&gt; data              :  9000  rows  4  cols 
 #&gt;   -&gt; target variable   :  9000  values 
+#&gt;   -&gt; model_info        :  package randomForest , ver. 4.6.14 , task regression ( </span><span style='color: #BBBB00;'> default </span><span> ) 
 #&gt;   -&gt; predict function  :  yhat.randomForest  will be used ( </span><span style='color: #BBBB00;'> default </span><span> )
 #&gt;   -&gt; predicted values  :  numerical, min =  2103.719 , mean =  3514.285 , max =  5364.833  
 #&gt;   -&gt; residual function :  difference between y and yhat ( </span><span style='color: #BBBB00;'> default </span><span> )
@@ -198,19 +199,19 @@ It's a data.frame with calculated local variable importance measure.</p>
 <span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/ingredients/man/ceteris_paribus.html'>ceteris_paribus</a></span>(<span class='no'>explainer_rf</span>, <span class='no'>new_apartment</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"vivo"</span>)
-<span class='fu'><a href='https://rdrr.io/pkg/vivo/man/local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
                           <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 232.8945
 #&gt; 2           surface 293.4722
 #&gt; 3             floor 250.3048
 #&gt; 4          no.rooms 100.7414</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/vivo/man/local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
                           <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;       variable_name    measure
 #&gt; 1 construction.year 17678.6327
 #&gt; 2           surface 27256.3841
 #&gt; 3             floor  2427.2493
 #&gt; 4          no.rooms   561.1966</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/pkg/vivo/man/local_variable_importance.html'>local_variable_importance</a></span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+<span class='fu'>local_variable_importance</span>(<span class='no'>profiles</span>, <span class='no'>apartments</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
                           <span class='kw'>absolute_deviation</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>point</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       variable_name  measure
 #&gt; 1 construction.year 171.1245
 #&gt; 2           surface 309.2562

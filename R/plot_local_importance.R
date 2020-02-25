@@ -35,14 +35,13 @@
 #' @export
 #'
 
-plot.local_importance <- function(x, ...){
+plot.local_importance <- function(x, ..., title = "Local variable importance"){
   df <- as.data.frame(x)
-  ggplot(df, aes(x = factor(df$variable_name , levels = df$variable_name[order(df$measure)]), y = df$measure)) +
-    geom_bar(stat = "identity", width = 0.5, fill = theme_drwhy_colors(1)) +
+  df$variable_measure <- paste0(df$variable_name, " = ", round(df$measure, 2))
+  ggplot(df, aes(x = factor(df$variable_measure , levels = df$variable_measure[order(df$measure)]), y = df$measure)) +
+    geom_bar(stat = "identity", width = 0.5, fill = colors_discrete_drwhy(1)) +
     coord_flip() +
-    xlab("") +
-    ylab("measure") +
-    ggtitle("") +
+    labs(x = "", y = "Measure", title = title) +
     theme_drwhy_vertical() +
     theme(legend.position = "none")
 }

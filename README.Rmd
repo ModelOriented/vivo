@@ -15,7 +15,7 @@ output: github_document
 
 This package helps to calculate instance level variable importance (local sensitivity). The importance measure is based on Ceteris Paribus profiles and can be calculated in eight variants. Select the variant that suits your needs by setting parameters:  `absolute_deviation`, `point` and `density`.
 
-`vivo` is a part of [DrWhy](drwhy.ai) collection of tools for Visual Exploration, Explanation and Debugging of Predictive Models.
+`vivo` is a part of [DrWhy](https://github.com/ModelOriented/DrWhy) collection of tools for Visual Exploration, Explanation and Debugging of Predictive Models.
 
 ## Installation
 
@@ -93,7 +93,7 @@ The value of the colored area is our measure. The larger the area, the more impo
 ```{r, message=FALSE, warning=FALSE, error=FALSE, include=TRUE, echo = FALSE}
 y_predict = predict(apartments_rf_model, new_apartment)
 plot(profiles) + geom_ribbon(aes(ymin = y_predict, ymax = predict(apartments_rf_model, profiles)),
-            alpha = 1,fill = '#47bac2') + geom_hline(yintercept = y_predict, colour = theme_drwhy_colors(1)) +show_observations(profiles)  
+            alpha = 1,fill = '#47bac2') + geom_hline(yintercept = y_predict, colour = colors_discrete_drwhy(1)) +show_observations(profiles)  
 ```
 
 
