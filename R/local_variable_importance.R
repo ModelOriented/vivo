@@ -92,7 +92,7 @@ local_variable_importance <- function(profiles, data, absolute_deviation = TRUE,
         }))
       }else{
         result <- unlist(lapply(unique(profiles$`_vname_`), function(w){
-          sqrt(mean((profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2))
+          sqrt(mean((profiles[profiles$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2))
         }))
       }
     }else{
