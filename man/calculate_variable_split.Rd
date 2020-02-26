@@ -20,11 +20,11 @@ A named list with splits for selected variables
 \description{
 This function calculate candidate splits for each selected variable.
 For numerical variables splits are calculated as percentiles
-(in general uniform quantiles of the length grid_points).
+(in general uniform quantiles of the length \code{grid_points}).
 For all other variables splits are calculated as unique values.
 }
 \note{
-This function is a copy of \code{calculate_varaible_split()} from \code{ingredients} package.
+This function is a copy of \code{calculate_varaible_split()} from \code{ingredients} package with small change.
 }
 \author{
 Przemyslaw Biecek

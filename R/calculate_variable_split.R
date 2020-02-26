@@ -2,7 +2,7 @@
 #'
 #' This function calculate candidate splits for each selected variable.
 #' For numerical variables splits are calculated as percentiles
-#' (in general uniform quantiles of the length grid_points).
+#' (in general uniform quantiles of the length \code{grid_points}).
 #' For all other variables splits are calculated as unique values.
 #'
 #'
@@ -15,7 +15,7 @@
 #' @importFrom stats quantile
 #' @author Przemyslaw Biecek
 #'
-#' @note This function is a copy of \code{calculate_varaible_split()} from \code{ingredients} package.
+#' @note This function is a copy of \code{calculate_varaible_split()} from \code{ingredients} package with small change.
 #'
 #'@export
 #'
@@ -26,10 +26,9 @@ calculate_variable_split <- function(data, variables = colnames(data), grid_poin
   variable_splits <- lapply(variables, function(var) {
     selected_column <- data[,var]
     if (is.numeric(selected_column)) {
-      probs <- seq(0, 1, length.out = grid_points)
-      unique(quantile(selected_column, probs = probs))
+      seq(from = min(selected_column), to = max(selected_column), length.out = grid_points)
     } else {
-      unique(selected_column)
+      sort(unique(selected_column))
     }
   })
   names(variable_splits) <- variables

@@ -7,9 +7,9 @@
 #' @param absolute_deviation logical parameter, if \code{absolute_deviation = TRUE} then measure is calculated as absolute deviation, else is calculated as a root from average squares
 #' @param point logical parameter, if \code{point = TRUE} then measure is calculated as a distance from f(x), else measure is calculated as a distance from average profiles
 #' @param density logical parameter, if \code{density = TRUE} then measure is weighted based on the density of variable, else is not weighted
-#'
-#' @return A data.frame of the class \code{local_variable_importance}.
-#' It's a data.frame with calculated local variable importance measure.
+#' @param grid_points maximum number of points for profile calculations, the default values is 101, the same as in \code{ingredients::ceteris_paribus}, if you use a different on, you should also change here
+#' @return A \code{data.frame} of the class \code{local_variable_importance}.
+#' It's a \code{data.frame} with calculated local variable importance measure.
 #' @examples
 #'
 #'
@@ -44,7 +44,7 @@
 #'
 
 
-local_variable_importance <- function(profiles, data, absolute_deviation = TRUE, point = TRUE, density = TRUE){
+local_variable_importance <- function(profiles, data, absolute_deviation = TRUE, point = TRUE, density = TRUE, grid_points = 101){
   if (!(c("ceteris_paribus_explainer") %in% class(profiles)))
     stop("The local_variable_importance() function requires an object created with ceteris_paribus() function.")
   if (!c("data.frame") %in% class(data))
@@ -55,7 +55,7 @@ local_variable_importance <- function(profiles, data, absolute_deviation = TRUE,
   })
   names(avg_yhat) <- unique(profiles$`_vname_`)
 
-  variable_split <- vivo::calculate_variable_split(data, variables = colnames(data))
+  variable_split <- vivo::calculate_variable_split(data, variables = colnames(data), grid_points = grid_points)
 
   weight <- vivo::calculate_weight(profiles, data, variable_split = variable_split)
 
@@ -66,21 +66,21 @@ local_variable_importance <- function(profiles, data, absolute_deviation = TRUE,
     if(point == TRUE){
       if(density == TRUE){
         result <- unlist(lapply(unique(profiles$`_vname_`), function(m){
-          sum(abs(weight[[m]] * (profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
+          sum(weight[[m]] *(abs(profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
         }))
       }else{
         result <- unlist(lapply(unique(profiles$`_vname_`), function(w){
-          sum(abs((profiles[profiles$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
+          mean(abs((profiles[profiles$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))))
         }))
       }
     }else{
       if(density == TRUE){
         result <- unlist(lapply(unique(profiles$`_vname_`), function(m){
-          sum(abs(weight[[m]] *(profiles[profiles$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])))
+          sum(weight[[m]] * (abs(profiles[profiles$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])))
         }))
       }else{
         result <- unlist(lapply(unique(profiles$`_vname_`), function(w){
-          sum(abs((profiles[profiles$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])))
+          mean(abs((profiles[profiles$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])))
         }))
       }
     }
@@ -88,27 +88,28 @@ local_variable_importance <- function(profiles, data, absolute_deviation = TRUE,
     if(point == TRUE){
       if(density == TRUE){
         result <- unlist(lapply(unique(profiles$`_vname_`), function(m){
-          sqrt(sum((weight[[m]] * (profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"]))))^2)/length(profiles[profiles$`_vname_` == m, "_yhat_"]))
+          sqrt(sum(weight[[m]] *(profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2))
         }))
       }else{
         result <- unlist(lapply(unique(profiles$`_vname_`), function(w){
-          sqrt(sum((profiles[profiles$`_vname_` == w, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2)/length(profiles[profiles$`_vname_` == w, "_yhat_"]))
+          sqrt(mean((profiles[profiles$`_vname_` == m, "_yhat_"] - unlist(unname(obs["_yhat_"])))^2))
         }))
       }
     }else{
       if(density == TRUE){
         result <- unlist(lapply(unique(profiles$`_vname_`), function(m){
-          sqrt(sum((weight[[m]] * (profiles[profiles$`_vname_` == m, "_yhat_"] - avg_yhat[[m]]))^2)/length(profiles[profiles$`_vname_` == m, "_yhat_"]))
+          sqrt(sum(weight[[m]] * ((profiles[profiles$`_vname_` == m, "_yhat_"] - avg_yhat[[m]])^2)))
         }))
       }else{
         result <- unlist(lapply(unique(profiles$`_vname_`), function(w){
-          sqrt(sum((profiles[profiles$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])^2)/(length(profiles[profiles$`_vname_` == w, "_yhat_"])))
+          sqrt(mean((profiles[profiles$`_vname_` == w, "_yhat_"] - avg_yhat[[w]])^2))
         }))
       }
     }
   }
 
   lvivo <- data.frame(variable_name = unique(profiles$`_vname_`), measure = result)
+  attr(lvivo, "observations") <- obs
   class(lvivo) = c("local_importance", "data.frame")
   lvivo
 }

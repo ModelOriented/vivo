@@ -38,11 +38,12 @@
 
 plot.local_importance <- function(x, ..., title = "Local variable importance"){
   df <- as.data.frame(x)
-  df$variable_measure <- paste0(df$variable_name, " = ", round(df$measure, 2))
+  obs <- attr(x, "observation")
+  df$variable_measure <- paste0(df$variable_name, " = ", obs[1:nrow(df)])
   ggplot(df, aes(x = factor(df$variable_measure , levels = df$variable_measure[order(df$measure)]), y = df$measure)) +
     geom_bar(stat = "identity", width = 0.5, fill = colors_discrete_drwhy(1)) +
     coord_flip() +
-    labs(x = "", y = "Measure", title = title) +
+    labs(x = "", y = "Measure", title = title, subtitle = paste0("For ", obs$`_label_`, ", ID: ", obs$`_ids_`)) +
     theme_drwhy_vertical() +
     theme(legend.position = "none")
 }

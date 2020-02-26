@@ -169,7 +169,8 @@
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"ingredients"</span>, <span class='kw'>warn.conflicts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='no'>split</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>vivo</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/vivo/man/calculate_variable_split.html'>calculate_variable_split</a></span>(<span class='no'>apartments</span>,
-                        <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>apartments</span>))
+                        <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>apartments</span>),
+                        <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"randomForest"</span>, <span class='kw'>warn.conflicts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>randomForest 4.6-14</span></div><div class='output co'>#&gt; <span class='message'>Type rfNews() to see new features/changes/bug fixes.</span></div><div class='input'><span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/randomForest/man/randomForest.html'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> +
                                     <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
@@ -191,31 +192,31 @@
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"vivo"</span>)
 <span class='fu'>calculate_weight</span>(<span class='no'>profiles</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>[, <span class='fl'>2</span>:<span class='fl'>5</span>], <span class='kw'>variable_split</span> <span class='kw'>=</span> <span class='no'>split</span>)</div><div class='output co'>#&gt; $construction.year
-#&gt;  [1] 0.015 0.015 0.013 0.005 0.012 0.012 0.011 0.016 0.011 0.015 0.019 0.019
-#&gt; [13] 0.008 0.011 0.012 0.013 0.011 0.011 0.012 0.008 0.014 0.011 0.013 0.013
-#&gt; [25] 0.012 0.013 0.014 0.013 0.014 0.014 0.017 0.011 0.008 0.010 0.008 0.009
-#&gt; [37] 0.024 0.024 0.018 0.011 0.016 0.010 0.009 0.010 0.010 0.022 0.022 0.018
-#&gt; [49] 0.018 0.016 0.011 0.010 0.018 0.010 0.009 0.006 0.016 0.017 0.017 0.008
-#&gt; [61] 0.016 0.016 0.011 0.006 0.013 0.009 0.017 0.009 0.015 0.008 0.012 0.015
+#&gt;  [1] 0.004 0.011 0.013 0.005 0.012 0.012 0.011 0.016 0.011 0.015 0.003 0.016
+#&gt; [13] 0.008 0.011 0.012 0.013 0.011 0.011 0.012 0.008 0.014 0.011 0.007 0.006
+#&gt; [25] 0.012 0.013 0.014 0.013 0.000 0.014 0.017 0.011 0.008 0.010 0.008 0.009
+#&gt; [37] 0.007 0.017 0.018 0.011 0.016 0.010 0.009 0.010 0.010 0.009 0.013 0.007
+#&gt; [49] 0.011 0.016 0.011 0.010 0.018 0.010 0.009 0.006 0.016 0.003 0.014 0.008
+#&gt; [61] 0.005 0.011 0.011 0.006 0.013 0.009 0.017 0.009 0.015 0.008 0.012 0.015
 #&gt; [73] 0.012 0.015 0.011 0.016 0.009 0.013 0.015 0.012 0.012 0.007 0.009 0.009
-#&gt; [85] 0.010 0.015 0.014 0.014 0.014 0.010 0.012 0.003
+#&gt; [85] 0.010 0.015 0.014 0.004 0.010 0.010 0.012 0.003
 #&gt; 
 #&gt; $surface
-#&gt;   [1] 0.013 0.013 0.007 0.013 0.010 0.005 0.014 0.014 0.014 0.006 0.009 0.011
-#&gt;  [13] 0.014 0.014 0.007 0.014 0.006 0.008 0.013 0.012 0.012 0.008 0.008 0.015
-#&gt;  [25] 0.009 0.014 0.004 0.008 0.011 0.012 0.008 0.011 0.011 0.012 0.006 0.014
-#&gt;  [37] 0.006 0.012 0.013 0.013 0.005 0.011 0.012 0.011 0.011 0.006 0.016 0.008
-#&gt;  [49] 0.009 0.007 0.017 0.017 0.016 0.016 0.008 0.016 0.018 0.018 0.012 0.012
-#&gt;  [61] 0.009 0.007 0.012 0.012 0.021 0.015 0.011 0.010 0.009 0.009 0.009 0.009
-#&gt;  [73] 0.014 0.014 0.011 0.008 0.008 0.010 0.012 0.011 0.024 0.024 0.005 0.016
-#&gt;  [85] 0.011 0.007 0.010 0.010 0.010 0.010 0.007 0.018 0.018 0.009 0.004 0.009
-#&gt;  [97] 0.007 0.010 0.009 0.004
+#&gt;   [1] 0.009 0.009 0.007 0.026 0.010 0.005 0.008 0.008 0.006 0.015 0.015 0.004
+#&gt;  [13] 0.004 0.017 0.017 0.014 0.014 0.014 0.007 0.012 0.012 0.008 0.008 0.015
+#&gt;  [25] 0.009 0.014 0.012 0.012 0.011 0.012 0.008 0.011 0.011 0.021 0.006 0.012
+#&gt;  [37] 0.012 0.006 0.013 0.013 0.005 0.007 0.016 0.016 0.007 0.006 0.016 0.008
+#&gt;  [49] 0.009 0.017 0.009 0.008 0.016 0.016 0.008 0.020 0.020 0.009 0.012 0.012
+#&gt;  [61] 0.004 0.007 0.012 0.012 0.007 0.026 0.026 0.010 0.018 0.018 0.009 0.009
+#&gt;  [73] 0.014 0.014 0.009 0.008 0.008 0.010 0.017 0.017 0.007 0.017 0.012 0.009
+#&gt;  [85] 0.011 0.016 0.004 0.001 0.015 0.015 0.007 0.005 0.019 0.019 0.004 0.016
+#&gt;  [97] 0.016 0.010 0.013 0.013
 #&gt; 
 #&gt; $floor
 #&gt;  [1] 0.090 0.116 0.087 0.086 0.095 0.104 0.103 0.103 0.108 0.108
 #&gt; 
 #&gt; $no.rooms
-#&gt; [1] 0.301 0.301 0.231 0.223 0.198 0.047
+#&gt; [1] 0.099 0.202 0.231 0.223 0.198 0.047
 #&gt; </div><div class='input'>
 
 </div></span></pre>

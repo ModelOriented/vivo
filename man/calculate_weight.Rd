@@ -26,7 +26,8 @@ data(apartments)
 
 library("ingredients", warn.conflicts = FALSE, quietly = TRUE)
 split <- vivo::calculate_variable_split(apartments,
-                        variables = colnames(apartments))
+                        variables = colnames(apartments),
+                        grid_points = 101)
 
 library("randomForest", warn.conflicts = FALSE, quietly = TRUE)
 apartments_rf_model <- randomForest(m2.price ~ construction.year + surface +
