@@ -16,8 +16,7 @@ profiles and can be calculated in eight variants. Select the variant
 that suits your needs by setting parameters: `absolute_deviation`,
 `point` and `density`.
 
-`vivo` is a part of
-[DrWhy](https://github.com/ModelOriented/DrWhy)
+`vivo` is a part of [DrWhy](https://github.com/ModelOriented/DrWhy)
 collection of tools for Visual Exploration, Explanation and Debugging of
 Predictive Models.
 
@@ -78,15 +77,15 @@ explainer_rf <- explain(apartments_rf_model,
 ```
 
     ## Preparation of a new explainer is initiated
-    ##   -> model label       :  randomForest  ( [33m default [39m )
+    ##   -> model label       :  randomForest  ( [33m default [39m )
     ##   -> data              :  9000  rows  4  cols 
     ##   -> target variable   :  9000  values 
-    ##   -> model_info        :  package randomForest , ver. 4.6.14 , task regression ( [33m default [39m ) 
-    ##   -> predict function  :  yhat.randomForest  will be used ( [33m default [39m )
-    ##   -> predicted values  :  numerical, min =  2112.703 , mean =  3516.96 , max =  5343.919  
-    ##   -> residual function :  difference between y and yhat ( [33m default [39m )
-    ##   -> residuals         :  numerical, min =  -1232.857 , mean =  -5.436286 , max =  2144.688  
-    ##  [32m A new explainer has been created! [39m
+    ##   -> model_info        :  package randomForest , ver. 4.6.14 , task regression ( [33m default [39m ) 
+    ##   -> predict function  :  yhat.randomForest  will be used ( [33m default [39m )
+    ##   -> predicted values  :  numerical, min =  2085.883 , mean =  3514.857 , max =  5329.799  
+    ##   -> residual function :  difference between y and yhat ( [33m default [39m )
+    ##   -> residuals         :  numerical, min =  -1244.621 , mean =  -3.333807 , max =  2156.984  
+    ##  [32m A new explainer has been created! [39m
 
 #### 3 Ceteris Paribus profiles
 
@@ -138,4 +137,4 @@ floor, construction.year and no.rooms.
 
 The package was created as a part of master’s diploma thesis at Warsaw
 University of Technology at Faculty of Mathematics and Information
-Science by [Anna Kozak](https://github.com/kozaka93).
+Science by Anna Kozak.
