@@ -31,7 +31,7 @@
 
 
 global_variable_importance <- function(profiles, grid_points = 101){
-  if (!(c("aggregated_profiles_explainer", "partial_dependence_explainer") %in% class(profiles)))
+  if (!(c("partial_dependence_explainer") %in% class(profiles)))
     stop("The global_variable_importance() function requires an object created with partial_dependence() or aggregate_profiles() function.")
 
 
@@ -47,6 +47,6 @@ global_variable_importance <- function(profiles, grid_points = 101){
 
   gvivo <- data.frame(variable_name = unique(profiles$`_vname_`), measure = result)
   class(gvivo) = c("global_importance", "data.frame")
-  lvivo
+  gvivo
 }
 
