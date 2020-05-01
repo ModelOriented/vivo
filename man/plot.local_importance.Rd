@@ -4,8 +4,7 @@
 \alias{plot.local_importance}
 \title{Plot Local Variable Importance measure}
 \usage{
-\method{plot}{local_importance}(x, ...,
-  title = "Local variable importance")
+\method{plot}{local_importance}(x, ..., title = "Local variable importance")
 }
 \arguments{
 \item{x}{object returned from \code{local_variable_importance()} function}
