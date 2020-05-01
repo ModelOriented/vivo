@@ -32,7 +32,7 @@
 
 global_variable_importance <- function(profiles, grid_points = 101){
   if (!(c("partial_dependence_explainer") %in% class(profiles)))
-    stop("The global_variable_importance() function requires an object created with partial_dependence() or aggregate_profiles() function.")
+    stop("The global_variable_importance() function requires an object created with partial_dependence() function.")
 
 
   avg_yhat <- lapply(unique(profiles$`_vname_`), function(x){

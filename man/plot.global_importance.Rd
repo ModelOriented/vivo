@@ -32,7 +32,7 @@ explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5],
                         y = apartmentsTest$m2.price)
 
 library("ingredients")
-profiles <- partial_dependence(explainer_rf, new_apartment)
+profiles <- partial_dependence(explainer_rf)
 
 library("vivo")
 measure <- global_variable_importance(profiles)
