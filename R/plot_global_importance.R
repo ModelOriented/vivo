@@ -20,7 +20,7 @@
 #'                         y = apartmentsTest$m2.price)
 #'
 #' library("ingredients")
-#' profiles <- partial_dependence(explainer_rf, new_apartment)
+#' profiles <- partial_dependence(explainer_rf)
 #'
 #' library("vivo")
 #' measure <- global_variable_importance(profiles)
