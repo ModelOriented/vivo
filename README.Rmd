@@ -23,7 +23,7 @@ The measure is based on Partial Dependence Profiles.
 
 ## vivo package
 
-The main functions are are `global_variable_importance()` and `local_variable_importance()`.
+The main functions are `global_variable_importance()` and `local_variable_importance()`.
 
 <img src="man/figures/vivo.png" align="center" width="600"/>
 

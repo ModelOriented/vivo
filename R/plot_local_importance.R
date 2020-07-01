@@ -5,7 +5,7 @@
 #' @param x object returned from \code{local_variable_importance()} function
 #' @param ... other object returned from \code{local_variable_importance()} function that shall be plotted together
 #' @param color a character. How to aggregated measure? Either  "_label_method_" or "_label_model_".
-#' @param variable if not \code{NULL} then only \code{variables} will be presented
+#' @param variables if not \code{NULL} then only \code{variables} will be presented
 #' @param type a character. How variables shall be plotted? Either "bars" (default) or "lines".
 #' @param title the plot's title, by default \code{'Local variable importance'}
 #' @return a ggplot2 object
@@ -48,6 +48,8 @@ plot.local_importance <- function(x,
                                   color = NULL,
                                   type = NULL,
                                   title = "Local variable importance"){
+
+  variable_measure <- NULL
 
   obs <- attr(x, "observation")
   dfl <- c(list(x), list(...))
