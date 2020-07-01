@@ -49,7 +49,7 @@ plot.local_importance <- function(x,
                                   type = NULL,
                                   title = "Local variable importance"){
 
-  variable_measure <- NULL
+  variable_measure <- measure <- NULL
 
   obs <- attr(x, "observation")
   dfl <- c(list(x), list(...))
