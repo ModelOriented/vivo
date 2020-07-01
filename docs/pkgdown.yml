@@ -1,6 +1,8 @@
-pandoc: 2.7.2
-pkgdown: 1.4.1
+pandoc: 2.9.2
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
-  vignette_apartments: vignette_apartments.html
+  vignette_apartments_global: vignette_apartments_global.html
+  vignette_apartments_local: vignette_apartments_local.html
+last_built: 2020-07-01T14:10Z
 

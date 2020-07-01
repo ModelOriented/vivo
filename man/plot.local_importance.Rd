@@ -4,13 +4,25 @@
 \alias{plot.local_importance}
 \title{Plot Local Variable Importance measure}
 \usage{
-\method{plot}{local_importance}(x, ...,
-  title = "Local variable importance")
+\method{plot}{local_importance}(
+  x,
+  ...,
+  variables = NULL,
+  color = NULL,
+  type = NULL,
+  title = "Local variable importance"
+)
 }
 \arguments{
 \item{x}{object returned from \code{local_variable_importance()} function}
 
-\item{...}{other parameters}
+\item{...}{other object returned from \code{local_variable_importance()} function that shall be plotted together}
+
+\item{variables}{if not \code{NULL} then only \code{variables} will be presented}
+
+\item{color}{a character. How to aggregated measure? Either  "_label_method_" or "_label_model_".}
+
+\item{type}{a character. How variables shall be plotted? Either "bars" (default) or "lines".}
 
 \item{title}{the plot's title, by default \code{'Local variable importance'}}
 }
@@ -34,14 +46,17 @@ explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5],
 
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
 
-library("ingredients")
-profiles <- ceteris_paribus(explainer_rf, new_apartment)
+profiles <- predict_profile(explainer_rf, new_apartment)
 
 library("vivo")
-measure <- local_variable_importance(profiles, apartments[,2:5],
+measure1 <- local_variable_importance(profiles, apartments[,2:5],
                           absolute_deviation = TRUE, point = TRUE, density = FALSE)
 
-plot(measure)
+plot(measure1)
+
+measure2 <- local_variable_importance(profiles, apartments[,2:5],
+                          absolute_deviation = TRUE, point = TRUE, density = TRUE)
+plot(measure1, measure2, color = "_label_method_", type = "lines")
 
 
 }
