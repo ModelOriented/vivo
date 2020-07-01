@@ -1,0 +1,99 @@
+---
+title: "Example of global variable importance"
+author: "Anna Kozak"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example of global variable importance}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Example of global variable importance
+
+In this vignette, we present a global variable importance measure based on Partial Dependence Profiles (PDP)  for the random forest regression model.
+
+```{r, include=FALSE, warning=FALSE, error=FALSE, message=FALSE}
+library("ggplot2")
+```
+
+### 1 Dataset
+
+We work on Apartments dataset from `DALEX` package.
+
+```{r, warning = FALSE, echo = FALSE, message = FALSE, include = TRUE}
+library("DALEX")
+data(apartments)
+head(apartments)
+```
+
+### 2 Random forest regression model
+
+Now, we define a random forest regression model and use `explain()` function from `DALEX`.
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+library("randomForest")
+apartments_rf_model <- randomForest(m2.price ~ construction.year + surface + floor +
+                                      no.rooms, data = apartments)
+explainer_rf <- explain(apartments_rf_model,
+                        data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+```
+
+
+
+### 3 Calculate Partial Dependence Profiles
+
+Let see the Partial Dependence Profiles calculated with `DALEX::model_profile()` function. The PDP also can be calculated with `DALEX::variable_profile()` or `ingredients::partial_dependence()`.
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+profiles <- model_profile(explainer_rf)
+plot(profiles) 
+```
+
+### 4 Calculate measure of global variable importance
+
+Now, we calculated a measure of global variable importance via oscillation based on PDP. 
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+library("vivo")
+measure <- global_variable_importance(profiles)
+```
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+plot(measure)
+```
+
+The most important variable is surface, then no.rooms, floor, and construction.year.
+
+
+### 5 Comparison of the importance of variables for two or more models
+
+Let created a linear regression model and `explain` object.
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+apartments_lm_model <- lm(m2.price ~ construction.year + surface + floor +
+                                      no.rooms, data = apartments)
+explainer_lm <- explain(apartments_lm_model,
+                        data = apartmentsTest[,2:5], y = apartmentsTest$m2.price)
+```
+
+We calculated Partial Dependence Profiles and measure.
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+profiles_lm <- model_profile(explainer_lm)
+
+measure_lm <- global_variable_importance(profiles_lm)
+```
+
+```{r, warning = FALSE, error = FALSE, message = FALSE, include = TRUE}
+plot(measure_lm, measure, type = "lines")
+```          
+
+Now we can see the order of importance of variables by model.

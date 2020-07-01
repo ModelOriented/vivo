@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal Function for Split Points for Selected Variables — calculate_variable_split • vivo</title>
+<title>Plot Global Variable Importance measure — plot.global_importance • vivo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -52,11 +52,8 @@
 
 
 
-<meta property="og:title" content="Internal Function for Split Points for Selected Variables — calculate_variable_split" />
-<meta property="og:description" content="This function calculate candidate splits for each selected variable.
-For numerical variables splits are calculated as percentiles
-(in general uniform quantiles of the length grid_points).
-For all other variables splits are calculated as unique values." />
+<meta property="og:title" content="Plot Global Variable Importance measure — plot.global_importance" />
+<meta property="og:description" content="Function plot.global_importance plots global importance measure based on Partial Dependence profiles." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -153,44 +150,75 @@ For all other variables splits are calculated as unique values." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal Function for Split Points for Selected Variables</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ModelOriented/vivo/blob/master/R/calculate_variable_split.R'><code>R/calculate_variable_split.R</code></a></small>
-    <div class="hidden name"><code>calculate_variable_split.Rd</code></div>
+    <h1>Plot Global Variable Importance measure</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ModelOriented/vivo/blob/master/R/plot_global_importance.R'><code>R/plot_global_importance.R</code></a></small>
+    <div class="hidden name"><code>plot.global_importance.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function calculate candidate splits for each selected variable.
-For numerical variables splits are calculated as percentiles
-(in general uniform quantiles of the length <code>grid_points</code>).
-For all other variables splits are calculated as unique values.</p>
+    <p>Function plot.global_importance plots global importance measure based on Partial Dependence profiles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calculate_variable_split</span>(<span class='no'>data</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='no'>data</span>), <span class='kw'>grid_points</span> <span class='kw'>=</span> <span class='fl'>101</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for global_importance</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Variable importance"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>validation dataset. Is used to determine distribution of observations.</p></td>
+      <th>x</th>
+      <td><p>object returned from <code><a href='global_variable_importance.html'>global_variable_importance()</a></code> function</p></td>
     </tr>
     <tr>
-      <th>variables</th>
-      <td><p>names of variables for which splits shall be calculated</p></td>
+      <th>...</th>
+      <td><p>other object returned from <code><a href='global_variable_importance.html'>global_variable_importance()</a></code> function that shall be plotted together</p></td>
     </tr>
     <tr>
-      <th>grid_points</th>
-      <td><p>number of points used for response path</p></td>
+      <th>type</th>
+      <td><p>a character. How variables shall be plotted? Either "bars" (default) or "lines".</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>the plot's title, by default <code>'Variable importance'</code></p></td>
+    </tr>
+    <tr>
+      <th>variable</th>
+      <td><p>if not <code>NULL</code> then only <code>variables</code> will be presented</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named list with splits for selected variables</p>
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+    <p>a ggplot2 object</p>
 
-    <p>This function is a copy of <code>calculate_varaible_split()</code> from <code>ingredients</code> package with small change.</p>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"DALEX"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>apartments</span>)
 
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"randomForest"</span>)
+<span class='no'>apartments_rf_model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/randomForest/man/randomForest.html'>randomForest</a></span>(<span class='no'>m2.price</span> ~ <span class='no'>construction.year</span> + <span class='no'>surface</span> +
+                                    <span class='no'>floor</span> + <span class='no'>no.rooms</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartments</span>)
+
+<span class='no'>explainer_rf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DALEX/man/explain.html'>explain</a></span>(<span class='no'>apartments_rf_model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>[,<span class='fl'>2</span>:<span class='fl'>5</span>],
+                        <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>apartmentsTest</span>$<span class='no'>m2.price</span>)</div><div class='output co'>#&gt; Preparation of a new explainer is initiated
+#&gt;   -&gt; model label       :  randomForest  ( <span style='color: #BBBB00;'> default </span><span> )
+#&gt;   -&gt; data              :  9000  rows  4  cols 
+#&gt;   -&gt; target variable   :  9000  values 
+#&gt;   -&gt; predict function  :  yhat.randomForest  will be used ( </span><span style='color: #BBBB00;'> default </span><span> )
+#&gt;   -&gt; predicted values  :  numerical, min =  2106.103 , mean =  3516.09 , max =  5283.956  
+#&gt;   -&gt; model_info        :  package randomForest , ver. 4.6.14 , task regression ( </span><span style='color: #BBBB00;'> default </span><span> ) 
+#&gt;   -&gt; residual function :  difference between y and yhat ( </span><span style='color: #BBBB00;'> default </span><span> )
+#&gt;   -&gt; residuals         :  numerical, min =  -1260.225 , mean =  -4.566031 , max =  2160.703  
+#&gt;  </span><span style='color: #00BB00;'> A new explainer has been created! </span><span> </div><div class='input'>
+<span class='no'>profiles</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DALEX/man/model_profile.html'>model_profile</a></span>(<span class='no'>explainer_rf</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"vivo"</span>)
+<span class='no'>measure</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='global_variable_importance.html'>global_variable_importance</a></span>(<span class='no'>profiles</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>measure</span>)</div><div class='img'><img src='plot.global_importance-1.png' alt='' width='700' height='433' /></div><div class='input'>
+
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

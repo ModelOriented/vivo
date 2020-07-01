@@ -1,18 +1,15 @@
 Package: vivo
-Title: Local Variable Importance via Oscillations of Ceteris Paribus Profiles
-Version: 0.1.2
+Title: Variable Importance via Oscillations
+Version: 0.2.0
 Authors@R: c(person("Anna", "Kozak", email = "anna1993kozak@gmail.com", role = c("aut", "cre")),
             person("Przemyslaw", "Biecek", role = c("aut", "ths")))
-Description: Provides an easy to calculate variable importance measure based on 
-  Ceteris Paribus plot and is calculated in eight variants. We obtain eight 
-  variants measure through the possible combinations of three parameters such as 
-  absolute_deviation, point and density.
+Description: Provides an easy to calculate local variable importance measure based on Ceteris Paribus profile 
+  and global variable importance measure based on Partial Dependence Profiles.
 Depends: R (>= 3.0)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports: ggplot2,
-  dplyr,
   ingredients,
   DALEX
 Suggests: 

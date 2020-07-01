@@ -4,14 +4,18 @@
 \alias{plot.global_importance}
 \title{Plot Global Variable Importance measure}
 \usage{
-\method{plot}{global_importance}(x, ..., title = "Variable importance")
+\method{plot}{global_importance}(x, ..., variables = NULL, type = NULL, title = "Variable importance")
 }
 \arguments{
 \item{x}{object returned from \code{global_variable_importance()} function}
 
-\item{...}{other parameters}
+\item{...}{other object returned from \code{global_variable_importance()} function that shall be plotted together}
+
+\item{type}{a character. How variables shall be plotted? Either "bars" (default) or "lines".}
 
 \item{title}{the plot's title, by default \code{'Variable importance'}}
+
+\item{variable}{if not \code{NULL} then only \code{variables} will be presented}
 }
 \value{
 a ggplot2 object
@@ -31,8 +35,7 @@ apartments_rf_model <- randomForest(m2.price ~ construction.year + surface +
 explainer_rf <- explain(apartments_rf_model, data = apartmentsTest[,2:5],
                         y = apartmentsTest$m2.price)
 
-library("ingredients")
-profiles <- partial_dependence(explainer_rf)
+profiles <- model_profile(explainer_rf)
 
 library("vivo")
 measure <- global_variable_importance(profiles)
