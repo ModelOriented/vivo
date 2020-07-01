@@ -11,11 +11,11 @@
 
 \item{...}{other object returned from \code{global_variable_importance()} function that shall be plotted together}
 
+\item{variables}{if not \code{NULL} then only \code{variables} will be presented}
+
 \item{type}{a character. How variables shall be plotted? Either "bars" (default) or "lines".}
 
 \item{title}{the plot's title, by default \code{'Variable importance'}}
-
-\item{variable}{if not \code{NULL} then only \code{variables} will be presented}
 }
 \value{
 a ggplot2 object

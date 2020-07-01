@@ -4,7 +4,7 @@
 #'
 #' @param x object returned from \code{global_variable_importance()} function
 #' @param ... other object returned from \code{global_variable_importance()} function that shall be plotted together
-#' @param variable if not \code{NULL} then only \code{variables} will be presented
+#' @param variables if not \code{NULL} then only \code{variables} will be presented
 #' @param type a character. How variables shall be plotted? Either "bars" (default) or "lines".
 #' @param title the plot's title, by default \code{'Variable importance'}
 #' @return a ggplot2 object

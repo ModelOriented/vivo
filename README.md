@@ -10,7 +10,7 @@ Status](https://img.shields.io/codecov/c/github/ModelOriented/vivo/master.svg)](
 
 ## Overview
 
-This `vivo` package helps to calculate 
+The `vivo` package helps to calculate 
 
 **- instance level variable importance (local sensitivity).**
 
@@ -24,7 +24,7 @@ The measure is based on Partial Dependence Profiles.
 
 ## vivo package
 
-The main function in `vivo` package are `global_variable_importance()` and `local_variable_importance()`.
+The main functions are are `global_variable_importance()` and `local_variable_importance()`.
 
 <img src="man/figures/vivo.png" align="center" width="600"/>
 
@@ -69,6 +69,13 @@ will barely change.
 #### Global variable importance
 
 Here we have a similar intuition as above, but we are looking at Partial Dependence Profiles, because they show how the prediction changes for the model, not only for observation.
+
+## How to use
+
+- [Example of local variable importance](https://modeloriented.github.io/vivo/articles/vignette_apartments_local.html)
+- [Example of global variable importance](https://modeloriented.github.io/vivo/articles/vignette_apartments_global.html)
+
+
 
 ## References
 
