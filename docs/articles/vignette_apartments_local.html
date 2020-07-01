@@ -144,10 +144,10 @@
 <span class="co">#&gt;   -&gt; data              :  9000  rows  4  cols </span>
 <span class="co">#&gt;   -&gt; target variable   :  9000  values </span>
 <span class="co">#&gt;   -&gt; predict function  :  yhat.randomForest  will be used ( [33m default [39m )</span>
-<span class="co">#&gt;   -&gt; predicted values  :  numerical, min =  2084.909 , mean =  3514.143 , max =  5324.035  </span>
+<span class="co">#&gt;   -&gt; predicted values  :  numerical, min =  2102.226 , mean =  3515.165 , max =  5345.8  </span>
 <span class="co">#&gt;   -&gt; model_info        :  package randomForest , ver. 4.6.14 , task regression ( [33m default [39m ) </span>
 <span class="co">#&gt;   -&gt; residual function :  difference between y and yhat ( [33m default [39m )</span>
-<span class="co">#&gt;   -&gt; residuals         :  numerical, min =  -1222.121 , mean =  -2.619471 , max =  2144.718  </span>
+<span class="co">#&gt;   -&gt; residuals         :  numerical, min =  -1279.39 , mean =  -3.641524 , max =  2132.567  </span>
 <span class="co">#&gt;  [32m A new explainer has been created! [39m</span></pre></body></html></div>
 </div>
 <div id="new-observation" class="section level3">
@@ -157,7 +157,7 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">new_apartment</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">construction.year</span> <span class="kw">=</span> <span class="fl">1998</span>, <span class="kw">surface</span> <span class="kw">=</span> <span class="fl">88</span>, <span class="kw">floor</span> <span class="kw">=</span> <span class="fl">2L</span>, <span class="kw">no.rooms</span> <span class="kw">=</span> <span class="fl">3</span>)
 <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">apartments_rf_model</span>, <span class="no">new_apartment</span>)
 <span class="co">#&gt;        1 </span>
-<span class="co">#&gt; 3858.164</span></pre></body></html></div>
+<span class="co">#&gt; 3881.725</span></pre></body></html></div>
 </div>
 <div id="calculate-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">

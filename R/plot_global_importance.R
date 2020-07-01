@@ -42,6 +42,8 @@ plot.global_importance <- function(x,
                                    type = NULL,
                                    title = "Variable importance"){
 
+  variable_name <- measure <- `_label_model_` <- variable_measure <- NULL
+
   dfl <- c(list(x), list(...))
   measure_df <- do.call(rbind, dfl)
   measure_df$variable_name <- factor(measure_df$variable_name, levels = measure_df$variable_name[order(measure_df$measure[1:(nrow(measure_df)/length(dfl))])])
