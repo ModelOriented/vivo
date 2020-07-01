@@ -2,7 +2,6 @@ library("vivo")
 library("DALEX")
 library("randomForest")
 library("ingredients")
-library("dplyr")
 library("ggplot2")
 
 data(apartments)
