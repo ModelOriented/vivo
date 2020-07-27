@@ -1,3 +1,8 @@
+vivo 0.2.1
+----------------------------------------------------------------
+* small fixes in  `global_variable_importance()`
+* remove `ingredients` dependence
+
 vivo 0.2.0
 ----------------------------------------------------------------
 * added `global_variable_importance()`

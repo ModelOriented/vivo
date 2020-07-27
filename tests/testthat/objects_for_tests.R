@@ -16,9 +16,9 @@ explainer_rf <- DALEX::explain(apartments_rf_model,
 
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
 
-cp <- ingredients::ceteris_paribus(explainer_rf, new_apartment)
+cp <- DALEX::predict_profile(explainer_rf, new_apartment)
 
-pdp <- ingredients::partial_dependence(explainer_rf)
+pdp <- DALEX::model_profile(explainer_rf)
 
 split <- vivo::calculate_variable_split(apartments[, 2:5], variables = colnames(apartments[, 2:5]))
 
@@ -36,9 +36,9 @@ explainer_rf_2 <- DALEX::explain(apartments_rf_model_2,
 
 new_apartment_2 <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3, district = factor("Wola", levels = levels(apartments$district)))
 
-cp_2 <- ingredients::ceteris_paribus(explainer_rf_2, new_apartment_2)
+cp_2 <- DALEX::predict_profile(explainer_rf_2, new_apartment_2)
 
-pdp <- ingredients::partial_dependence(explainer_rf)
+pdp <- DALEX::model_profile(explainer_rf)
 
 split <- vivo::calculate_variable_split(apartments[, 2:5], variables = colnames(apartments[, 2:5]))
 
@@ -55,9 +55,9 @@ explainer_lm <- DALEX::explain(apartments_lm_model,
 
 new_apartment <- data.frame(construction.year = 1998, surface = 88, floor = 2L, no.rooms = 3)
 
-cp_lm <- ingredients::ceteris_paribus(explainer_lm, new_apartment)
+cp_lm <- DALEX::predict_profile(explainer_lm, new_apartment)
 
-pdp_lm <- ingredients::partial_dependence(explainer_lm)
+pdp_lm <- DALEX::model_profile(explainer_lm)
 
 measure_lm <- local_variable_importance(cp_lm, apartments[,2:5], absolute_deviation = FALSE, point = TRUE, density = TRUE)
 

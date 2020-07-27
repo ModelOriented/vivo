@@ -1,6 +1,6 @@
 Package: vivo
 Title: Variable Importance via Oscillations
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person("Anna", "Kozak", email = "anna1993kozak@gmail.com", role = c("aut", "cre")),
             person("Przemyslaw", "Biecek", role = c("aut", "ths")))
 Description: Provides an easy to calculate local variable importance measure based on Ceteris Paribus profile 
@@ -10,7 +10,6 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Imports: ggplot2,
-  ingredients,
   DALEX
 Suggests: 
     knitr,
@@ -20,7 +19,8 @@ Suggests:
     gridExtra,
     grid,
     lattice,
-    testthat
+    testthat,
+    ingredients
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 URL: https://github.com/ModelOriented/vivo
