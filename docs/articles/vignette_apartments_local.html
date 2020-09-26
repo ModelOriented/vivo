@@ -105,7 +105,7 @@
       <h1 data-toc-skip>Example of local variable importance</h1>
                         <h4 class="author">Anna Kozak</h4>
             
-            <h4 class="date">2020-07-27</h4>
+            <h4 class="date">2020-09-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ModelOriented/vivo/blob/master/vignettes/vignette_apartments_local.Rmd"><code>vignettes/vignette_apartments_local.Rmd</code></a></small>
       <div class="hidden name"><code>vignette_apartments_local.Rmd</code></div>
@@ -144,10 +144,10 @@
 <span class="co">#&gt;   -&gt; data              :  9000  rows  4  cols </span>
 <span class="co">#&gt;   -&gt; target variable   :  9000  values </span>
 <span class="co">#&gt;   -&gt; predict function  :  yhat.randomForest  will be used ( [33m default [39m )</span>
-<span class="co">#&gt;   -&gt; predicted values  :  numerical, min =  2113.543 , mean =  3514.707 , max =  5303.391  </span>
+<span class="co">#&gt;   -&gt; predicted values  :  numerical, min =  2093.577 , mean =  3514.544 , max =  5329.173  </span>
 <span class="co">#&gt;   -&gt; model_info        :  package randomForest , ver. 4.6.14 , task regression ( [33m default [39m ) </span>
 <span class="co">#&gt;   -&gt; residual function :  difference between y and yhat ( [33m default [39m )</span>
-<span class="co">#&gt;   -&gt; residuals         :  numerical, min =  -1214.298 , mean =  -3.183269 , max =  2095.917  </span>
+<span class="co">#&gt;   -&gt; residuals         :  numerical, min =  -1193.497 , mean =  -3.020797 , max =  2140.187  </span>
 <span class="co">#&gt;  [32m A new explainer has been created! [39m</span></pre></body></html></div>
 </div>
 <div id="new-observation" class="section level3">
@@ -157,7 +157,7 @@
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">new_apartment</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">construction.year</span> <span class="kw">=</span> <span class="fl">1998</span>, <span class="kw">surface</span> <span class="kw">=</span> <span class="fl">88</span>, <span class="kw">floor</span> <span class="kw">=</span> <span class="fl">2L</span>, <span class="kw">no.rooms</span> <span class="kw">=</span> <span class="fl">3</span>)
 <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(<span class="no">apartments_rf_model</span>, <span class="no">new_apartment</span>)
 <span class="co">#&gt;        1 </span>
-<span class="co">#&gt; 3880.312</span></pre></body></html></div>
+<span class="co">#&gt; 3882.594</span></pre></body></html></div>
 </div>
 <div id="calculate-ceteris-paribus-profiles" class="section level3">
 <h3 class="hasAnchor">

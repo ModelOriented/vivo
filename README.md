@@ -70,6 +70,8 @@ will barely change.
 
 Here we have a similar intuition as above, but we are looking at Partial Dependence Profiles, because they show how the prediction changes for the model, not only for observation.
 
+<img src="man/figures/vivo_gif.gif" align="center" width="600"/>
+
 ## How to use
 
 - [Example of local variable importance](https://modeloriented.github.io/vivo/articles/vignette_apartments_local.html)
